@@ -1,0 +1,732 @@
+﻿/* CSS Reset- Eric Meyer */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label,legend , table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	margin: 0;
+	padding: 0;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+a[href]{text-decoration:none;}
+a[href]:hover{
+	color:#47CAFE;
+}
+ul,ol{list-style:none;}
+
+body{font:normal 14px/1.2 "Segoe UI","Lucida Sans Unicode",Arial,Helvetica,sans-serif;}
+
+.clear{
+	clear:both;
+}
+
+
+/* RESET END */
+
+/* ============NAVIGATION BAR ================= */
+
+#navbar{
+	width:100%;
+	height:30px;
+	position:relative;
+	background-color:aliceblue;
+	border-bottom:1px solid #ccc;
+	z-index:10;
+}
+
+#innernav{
+	position:relative;
+	width:840px;
+	margin:0 auto;
+	z-index:99;
+}
+
+#headnav{
+	position:relative;
+}
+
+#headnav li{display:inline;}
+
+#headnav li a{
+	display:block;
+	padding:0 10px;
+	text-align:center;
+	float:left;
+	color:#333;
+	line-height:30px;
+}
+
+#headnav li a:hover{
+	color:#fff;
+	background-color:#58ADFF;
+}
+
+#headnav li:last-child a{
+	border:none;
+}
+
+.loginmenu{
+	position:absolute;
+	right:0;
+}
+
+.loginmenu li{
+	display:inline-block;
+	padding:6px 5px 6px 10px;
+}
+
+.loginmenu li a{
+	color:#333;
+	padding-left:20px;
+}
+
+.loginmenu li a:visited{
+}
+
+.login{
+	background-image:url('images/login.png');
+	background-repeat:no-repeat;
+	background-position:left center;
+}
+
+.register{
+	padding:6px 5px;
+	position:absolute;
+	display:inline-block;
+	right:0;
+	font-weight:bold;
+	text-decoration:underline;
+	color:green;
+}
+
+.register:hover{
+	text-decoration:underline;
+}
+
+
+/* ===========HEADER SECTION=========== */
+.header{
+	position:relative;
+	width:840px;
+	height:60px;
+	margin:0 auto;
+}
+
+#logo{
+	display:block;
+	width:203px;
+	height:51px;
+	background-image:url('images/logo.jpg');
+	background-repeat:no-repeat;
+	position:absolute;
+	left:0;top:5px;
+	text-indent:-999px;
+}
+
+.social{
+	position:absolute;
+	right:0px;
+	top:15px;
+}
+
+.social li{
+	display:inline;
+}
+
+.social li a span{
+	margin-right:15px;
+	font-size:16px;
+	font-weight:bold;
+}
+
+.social li a{
+	display:block;
+	padding:0 5px;
+	float:left;
+	line-height:22px;
+}
+
+.social li a[href]{
+	width:85px;
+	height:22px;
+	text-indent:-9999px;
+	background-image:url('images/social.png');
+	background-repeat:no-repeat;
+}
+
+.fb{
+	background-position:0 0;
+}
+
+.twit{
+	background-position:-95px 0;
+}
+
+.gplus{
+	background-position:-190px 0;
+}
+
+/* ===========FOOTER SECTION=========== */
+.footer{
+	position:relative;
+	width:100%;
+	height:auto;
+	overflow:auto;
+	border-top:1px solid #ccc;
+	padding:5px 0;
+	font-family:Calibri,Arial , Helvetica, sans-serif;
+	background-color:azure;
+	padding-bottom:10px;
+}
+
+#innerfooter{
+	width:850px;
+	height:auto;
+	position:relative;
+	margin:0 auto;
+}
+
+#footernav li{
+	display:inline;
+}
+
+#footernav li a{
+	display:block;
+	padding:0 5px;
+	float:left;
+}
+
+#copyright{
+	position:absolute;
+	top:5px;
+	right:0;
+	font-size:18px;
+	width:200px;
+	text-align:right;
+	color:#666;
+}
+
+#copyright img{
+	float:left;
+}
+
+
+.othernav{
+	position:relative;
+	float:left;
+	margin-right:30px;
+	margin-left:10px;
+}
+
+.othernav li{
+	padding:3px 5px;
+}
+
+.othernav li a{
+	color:#666;
+		font-size:13px;
+}
+
+.othernav li a:hover{
+	text-decoration:underline;
+}
+
+.footer .social{
+	right:250px;
+	top:10px;
+}
+
+/* ================FEATURED TEXT AREA================ */
+#featuredcontent{
+	position:relative;
+	width:840px;
+	margin:0 auto;
+	min-height:340px;
+	height:auto;
+	margin-top:10px;
+	background-image:url('images/featuredimage.jpg');
+	background-repeat:no-repeat;
+}
+
+#featuredtext{
+	position:relative;
+	width:380px;
+	height:auto;
+	padding:0 0 0 15px;
+	float:right;
+	margin-bottom:10px;
+	background-color:#fff;
+	background-color:rgba(255,255,255, 0.8);
+}
+
+#featuredtext h2{
+	font:bold 32px/1 "Segoe UI Light","Segoe UI", Arial, helvetica, sans-serif;
+	color:#43B9FE;
+}
+
+
+#featuredtext ul{
+	margin-top:15px;
+}
+
+#featuredtext li{
+	padding:5px 0;
+	font-size:18px;
+	color:#5fa51d;
+}
+
+a#homeregisterbtn{
+	position:relative;
+	display:block;
+	width:160px;
+	padding:10px 0 13px 0;
+	line-height:1;
+	text-align:center;
+	margin-top:25px;
+	margin-left:160px;
+	font-size:18px;
+	color:#fff;
+	border-radius:3px;
+	background-color:#61b11b;
+	-webkit-transition:background-color .5s ease-out ;
+	-o-transition:background-color .5s ease-out ;
+	transition:background-color .5s ease-out ;
+
+}
+
+a#homeregisterbtn:hover{
+	background-color:#6dc81e;
+	-webkit-transition:background-color .10s linear ;
+	-o-transition:background-color .10s linear ;
+	transition:background-color .10s linear ;
+
+}
+
+
+a#free{
+	position:absolute;
+	right:100px;
+	text-align:left;
+	bottom:12px;
+	color:#999;
+}
+
+/* ==================SMS SENDING PROCESS AREA===================== */
+
+#smsprocess{
+	position:relative;
+	width:100%;
+	overflow:auto;
+	background-color:#f5fdcb;
+	padding:10px 0px;
+/*	border-width:1px 0 1px 0;
+	border-color:#ccc;
+	border-style:dashed;
+*/	box-shadow:0px 0px 1px 1px #D9D4B1;
+}
+
+#innerdiv{
+	width:880px;
+	margin:0 auto;
+	overflow:auto;
+}
+
+.process{
+	position:relative;
+	width:28%;
+	padding:10px 22px;
+	padding-bottom:15px;
+	float:left;
+/*	outline:1px solid red;
+*/}
+
+.process h2{
+	font-size:32px;
+	width:60px;
+	height:60px;
+	background-color:#FFF;
+	color:#333;
+	-moz-border-radius:50%;
+	border-radius:50%;
+	float:left;
+	text-align:center;
+	line-height:60px;
+	margin-right:15px;
+	margin-top:2px;
+	box-shadow:inset 1px 1px 1px 1px #ccc;
+}
+
+
+.process h4{
+	font-weight:bold;
+	font-size:21px;
+}
+
+.process p{
+	margin-left:75px;
+	text-align:left;
+}
+
+
+/* ================= HOMEPAGE CONTENT==================== */
+
+#homecontent{
+	position:relative;
+	width:100%;
+	overflow:auto;
+	margin:0 auto;
+	margin-top:1px;
+}
+
+.innerhomeconent{
+	width:800px;
+	margin:0 auto;
+}
+
+#homecontent h3{
+	font-size:24px;
+	margin-top:15px;
+	font-family:Arial, Helvetica, sans-serif;
+	
+}
+
+.leftcol{
+	width:65%;
+	float:left;
+}
+
+.leftcol p{
+	line-height:1.4;
+	margin-bottom:15px;
+	text-align:justify;
+	font-family:Calibri, Arial, Helvetica, sans-serif;
+}
+
+.rightcol{
+	margin-left:67%;
+	background-color:#F1F1FF;
+	padding:20px 15px;
+	height:400px;
+}
+
+
+.callinfo img, .mailinfo img{
+	margin:0px 10px 10px 0;
+	float:left;
+}
+
+.callinfo h3{
+	line-height:21px;
+}
+
+.mailinfo h4{
+	margin-top:5px;
+	font-weight:bold;
+	margin-left:70px;
+}
+
+.callinfo span
+{
+	color:#999999;
+}
+
+.telnumber{
+	font-size:21px;
+	margin-bottom:5px;
+	margin-top:-5px;
+	color:green;
+}
+
+.mailinfo{
+	margin-top:20px;
+}
+
+
+/*-------LOGIN STARTS HERE -------*/
+
+/* Login Container (default to float:right) */
+#loginContainer {
+    position:absolute;
+    right:70px;
+    font-size:12px;
+}
+
+/* Login Button */
+#loginButton { 
+    display:inline-block;
+    float:right;
+    position:relative;
+    z-index:30;
+    cursor:pointer;
+}
+
+/* Login Button Text */
+#loginButton span {
+    color:#445058; 
+    font-size:14px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:6px 29px 5px 10px;
+    background:url(images/loginArrow.png) no-repeat 53px 7px;
+    display:block
+}
+
+#loginButton span:hover {
+	color:#47CAFE;
+}
+
+/* Login Box */
+#loginBox {
+    position:absolute;
+    top:31px;
+    right:0;
+    display:none;
+    z-index:29;
+}
+
+/* If the Login Button has been clicked */    
+#loginButton.active {
+    border-radius:3px 3px 0 0;
+}
+
+#loginButton.active span {
+    background-position:53px -76px;
+}
+
+
+/* Login Form */
+#loginForm {
+    width:248px; 
+    border:1px solid #ccc;
+    border-top:none;
+    border-radius:0px 0 3px 3px;
+    -moz-border-radius:3px 0 3px 3px;
+    margin-top:-1px;
+    background:#F0F8FF;
+    padding:6px;
+}
+
+#loginForm fieldset {
+    margin:0 0 12px 0;
+    display:block;
+    border:0;
+    padding:0;
+}
+
+fieldset#body {
+    background:#fff;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    padding:10px 13px;
+    margin:0;
+}
+
+#loginForm #checkbox {
+    width:auto;
+    margin:1px 9px 0 0;
+    float:left;
+    padding:0;
+    border:0;
+    *margin:-3px 9px 0 0; /* IE7 Fix */
+}
+
+#body label {
+    color:#3a454d;
+    margin:9px 0 0 0;
+    display:block;
+    float:left;
+}
+
+#loginForm #body fieldset label {
+    display:block;
+    float:none;
+    margin:0 0 6px 0;
+}
+
+/* Default Input */
+#loginForm input {
+    width:92%;
+    border:1px solid #899caa;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    color:#3a454d;
+    font-weight:bold;
+    padding:8px 8px;
+    box-shadow:inset 0px 1px 3px #bbb;
+    -webkit-box-shadow:inset 0px 1px 3px #bbb;
+    -moz-box-shadow:inset 0px 1px 3px #bbb;
+    font-size:12px;
+}
+
+/* Sign In Button */
+#loginForm #login {
+    width:auto;
+    float:left;
+    background:#339cdf url(images/loginbuttonbg.png) repeat-x;
+    color:#fff;
+    padding:7px 10px 8px 10px;
+    text-shadow:0px -1px #278db8;
+    border:1px solid #339cdf;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    margin:0 12px 0 0;
+    cursor:pointer;
+    *padding:7px 2px 8px 2px; /* IE7 Fix */
+}
+
+/* Forgot your password */
+#loginForm span {
+    text-align:center;
+    display:block;
+    padding:7px 0 4px 0;
+}
+
+#loginForm span a {
+    color:#3a454d;
+    text-shadow:1px 1px #fff;
+    font-size:12px;
+}
+
+/*input:focus {
+    outline:none;
+}*/
+
+
+/* +++++++++++++ REGISTER PAGE +++++++++++++++ */
+
+.registerpage{
+	position:relative;
+	width:840px;
+	height:auto;
+	margin:0 auto;
+	background-color:#F8FCFF;
+}
+
+#newcampform{
+	font-family:Arial, Helvetica, sans-serif;
+	width:500px;
+}
+
+#newcampform div{
+	padding:8px 10px;
+	background-color:#F8FCFF;
+	margin:5px 0;
+}
+
+
+#newcampform label{
+	display:block;
+	margin-bottom:2px;
+}
+
+#newcampform h3{
+	font-size:16px;
+	color:limegreen;
+	font-weight:bold;
+	padding:5px 0;
+}
+
+#newcampform input[type=text],[type=password]{
+	width:250px;
+	margin-bottom:5px;
+	line-height:21px;
+	height:23px;
+	font-size:14px;
+	border:1px solid #ccc;
+	background-color:#fffedb;
+}
+
+#newcampform input[type=text]:focus{
+	background-color:#fff;
+}
+
+#newcampform textarea{
+	width:400px;
+	height:80px;
+}
+
+#newcampform p{
+	color:#666;
+	font-size:12px;
+	width:400px;
+	text-align:justify;
+	margin:2px 0;
+}
+
+#newcampform select{
+	width:150px;
+}
+
+#newcampform li{
+	line-height:25px;
+}
+
+#newcampform ul label{
+	display:inline;
+}
+
+.registerpage h1{
+	font-size:24px;
+	font-weight:bold;
+	color:#61B11B;
+	text-transform:uppercase;
+	padding:5px 10px;
+	margin-top:20px;
+}
+
+a.registerbtn{
+	position:relative;
+	display:block;
+	width:160px;
+	padding:10px 0 13px 0;
+	line-height:1;
+	text-align:center;
+	margin:10px;
+	font-size:18px;
+	color:#fff;
+	border-radius:3px;
+	background-color:#61b11b;
+}
+
+a.registerbtn:hover{
+	color:#fff;
+}
+
+#signup .error{
+    color: #ff0000 !important;
+}
+
+.successbox, .warningbox, .errormsgbox {
+    font-weight:bold;
+    border: 2px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 70px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    width:600px;
+}
+
+.successbox {
+    color: #4F8A10;
+    background-color:#EDFCED;
+    background-image:url('images/success.png');
+}
+.warningbox {
+    color: #FFE222;
+    background-color:#FAF9C9;
+    background-image: url('images/warning.png');
+}
+.errormsgbox {
+    color: #D8000C;
+    background-color:#FDD5CE;
+    background-image: url('images/error.png');
+}
+
+
+
+
+
+
+
+
