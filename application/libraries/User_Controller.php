@@ -24,7 +24,7 @@ class User_Controller extends CI_Controller {
     }
 	
 	public function set_temlates(){
-		$this->template->write_view('header', 'template/user/header',array());
+		//$this->template->write_view('header', 'template/user/header',array());
 		$this->template->write_view('footer', 'template/user/footer',array());
 	}
 }

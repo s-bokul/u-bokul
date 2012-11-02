@@ -61,7 +61,8 @@ class User_model extends CI_Model{
         $status = false;
         $conditional_array = array(
             'email' => $data['email'],
-            'passwd' => md5($data['passwd'])
+            'passwd' => md5($data['passwd']),
+            'is_active' => 1
         );
         $query = $this->db->get_where('user_informations', $conditional_array);
         if($query->num_rows() > 0)
@@ -72,6 +73,20 @@ class User_model extends CI_Model{
         }
 
         return $status;
+    }
+
+    public function getUserInfo($user_id)
+    {
+        $conditional_array = array(
+            'user_id' => $user_id
+        );
+        $query = $this->db->get_where('user_informations', $conditional_array);
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+        }
+
+        return $result[0];
     }
 
 }
