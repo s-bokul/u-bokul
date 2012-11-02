@@ -24,7 +24,11 @@ class User_Controller extends CI_Controller {
     }
 	
 	public function set_temlates(){
-		//$this->template->write_view('header', 'template/user/header',array());
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $this->load->model('user_model');
+        $data['user_info'] = $this->user_model->getUserInfo($user_id);
+		$this->template->write_view('header', 'template/user/header',array('data'=>$data));
 		$this->template->write_view('footer', 'template/user/footer',array());
 	}
 }

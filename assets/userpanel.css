@@ -381,11 +381,11 @@ body{
 	margin-top:25px;
 }
 
-.purchase input[type=text]{
-	height:22px;
-	width:80px;
+.purchase input[type=text],select{
+
+	width:200px;
 	text-align:right;
-	font-size:18px;
+	font-size:14px;
 }
 
 .purchase button{
@@ -405,7 +405,7 @@ body{
 }
 
 button.purchasenext{
-	margin-left:560px;
+	margin-left:400px;
 	margin-top:10px;
 	width:100px;
 	height:40px;
@@ -776,4 +776,34 @@ h2.historytab{
 .historysearch{
 	margin-left:30px;
 	margin-top:20px;
+}
+
+.error{
+    color: #ff0000 !important;
+}
+
+.successbox, .warningbox, .errormsgbox {
+    font-weight:bold;
+    border: 2px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 70px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    width:600px;
+}
+
+.successbox {
+    color: #4F8A10;
+    background-color:#EDFCED;
+    background-image:url('images/success.png');
+}
+.warningbox {
+    color: #FFE222;
+    background-color:#FAF9C9;
+    background-image: url('images/warning.png');
+}
+.errormsgbox {
+    color: #D8000C;
+    background-color:#FDD5CE;
+    background-image: url('images/error.png');
 }

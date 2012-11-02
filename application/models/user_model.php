@@ -89,6 +89,16 @@ class User_model extends CI_Model{
         return $result[0];
     }
 
+    public function purchase_save($params){
+        $status = false;
+        $params['paid_status'] = 0;
+        $params['date_created'] = date('Y-m-d');
+        $this->db->set($params);
+        if($this->db->insert('purchase'))
+            $status = true;
+        return $status;
+    }
+
 }
 
 

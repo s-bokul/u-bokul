@@ -5,6 +5,7 @@
 
         <li><a>Welcome <?php echo $data['user_info']['fname'].' '.$data['user_info']['lname']; ?></a></li>
         <li><a class="credit"><?php echo $data['user_info']['balance']; ?> $</a></li>
+        <li><a class="purchasebtn" href="/userpanel/purchase">Purchase</a></li>
         <li><a href="/login/logout">Logout</a></li>
     </ul>
 

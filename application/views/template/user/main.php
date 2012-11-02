@@ -8,6 +8,7 @@
     <!-- #BeginEditable "doctitle" -->
     <title>User Panel : <?php echo $title; ?></title>
     <!-- #EndEditable -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
     <link href="<?php echo base_url()."assets/userpanel.css"; ?>" rel="stylesheet" type="text/css">
 </head>
 
