@@ -95,7 +95,51 @@ class User_model extends CI_Model{
         $params['date_created'] = date('Y-m-d');
         $this->db->set($params);
         if($this->db->insert('purchase'))
+        {
             $status = true;
+            $history_data = array(
+                'user_id' => $params['user_id'],
+                'transaction_type' => 'P',
+                'information' => 'Purchase Credit',
+                'amount' => $params['amount'],
+                'payment_status' => 0,
+                'create_date' => $params['date_created']
+            );
+            $this->db->set($history_data);
+            $this->db->insert('balance_history');
+        }
+
+        return $status;
+    }
+
+    public function investment_save($params)
+    {
+        $status = false;
+        $params['payment_status'] = 1;
+        $params['created_date'] = date('Y-m-d');
+        $this->db->set($params);
+
+        $result = $this->db->simple_query("UPDATE `user_informations` SET `balance` = balance-".$params['investment_amount']." WHERE `user_informations`.`user_id` = ".$params['user_id'].";");
+
+        if($result)
+        {
+            if($this->db->insert('investments'))
+            {
+                $status = true;
+                $history_data = array(
+                    'user_id' => $params['user_id'],
+                    'transaction_type' => 'I',
+                    'information' => 'Invest Credit',
+                    'amount' => $params['investment_amount'],
+                    'payment_status' => 1,
+                    'create_date' => $params['created_date']
+                );
+                $this->db->set($history_data);
+                $this->db->insert('balance_history');
+            }
+        }
+
+
         return $status;
     }
 

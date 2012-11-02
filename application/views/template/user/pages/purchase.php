@@ -4,11 +4,7 @@
 
         $("#invest").validate({
             rules: {
-                amount: {required:true, number: true, min: 20}
-            },
-            messages:{
-                email:{ required:"Please Enter Your Email", email:"Invalid Email Address", remote:"Email Already Taken"},
-                parent_email:{ remote:"Parent Not Exists"}
+                amount: {required:true, number: true, min: 10}
             },
             errorPlacement: function(error, element) {
                 if(element.attr("name") == "amount")
@@ -23,7 +19,7 @@
 <!-- #BeginEditable "body" -->
 <div id="purchasepage">
 
-    <h1 class="pagetitle">New Investment</h1>
+    <h1 class="pagetitle">Purchase Credit</h1>
     <div>
         <?php
         $message = json_decode($this->session->flashdata('msg'), 1);

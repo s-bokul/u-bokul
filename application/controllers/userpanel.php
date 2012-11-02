@@ -31,8 +31,8 @@ class Userpanel extends User_Controller {
                 $this->purchase_save();
                 break;
 
-            case 'other-services':
-                $this->other_services();
+            case 'investment-save':
+                $this->investment_save();
                 break;
 
 
@@ -80,6 +80,42 @@ class Userpanel extends User_Controller {
         $title = 'New Investment';
         $this->template->write_view('content','template/user/pages/investment',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
+    }
+
+    public function investment_save()
+    {
+        $this->load->model('user_model');
+
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $data_investment = $this->input->post();
+        $data_investment['user_id'] = $user_id;
+        if($this->user_model->investment_save($data_investment))
+        {
+            $msg = array(
+                'status' => true,
+                'class' => 'successbox',
+                'msg' => 'Successfully Invested.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+        else
+        {
+            $msg = array(
+                'status' => false,
+                'class' => 'errormsgbox',
+                'msg' => 'Failed please try again.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+
+        redirect('/userpanel/new-investment');
     }
 
     public function purchase()
