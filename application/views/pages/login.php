@@ -44,7 +44,7 @@
         </div>
         <div>
             <label>Password</label>
-            <input type="password" name="password" id="password">
+            <input type="password" name="passwd" id="passwd">
         </div>
 
             <!--<a href="javascript:void(0)" id="logbtn" class="registerbtn">Sign in</a>-->

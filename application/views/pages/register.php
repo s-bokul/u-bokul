@@ -10,13 +10,18 @@
         $("#signup").validate({
             rules: {
                 email: {required:true, email:true, remote:"/register"},
-                first_name: { required:true, maxlength: 32, names:true },
-                last_name: { required:true, maxlength: 32, names:true },
-                mobile_number: { required:true, remote:"/register" }
+                parent_email: { remote:"/register" },
+                passwd: "required",
+                cnf_password: {
+                    equalTo: "#passwd"
+                },
+                passwd:{minlength:6},
+                fname: { required:true, maxlength: 32, names:true },
+                lname: { required:true, maxlength: 32, names:true }
             },
             messages:{
                 email:{ required:"Please Enter Your Email", email:"Invalid Email Address", remote:"Email Already Taken"},
-                mobile_number:{ remote:"Mobile Number Already Taken"}
+                parent_email:{ remote:"Parent Not Exists"}
             }
         });
 
@@ -69,23 +74,30 @@
                 <input type="text" name="parent_email" id="parent_email">
             </div>
             <div>
+                <label>Password</label>
+                <input type="password" name="passwd" id="passwd">
+                <label>Confirm Password</label>
+                <input type="password" name="cnf_password" id="cnf_password">
+            </div>
+            <div>
                 <label>First Name</label>
-                <input type="text" name="first_name" id="first_name">
+                <input type="text" name="fname" id="fname">
                 <label>Last Name</label>
-                <input type="text" name="last_name" id="last_name">
+                <input type="text" name="lname" id="lname">
                 <label>Address</label>
                 <input type="text" name="address" id="address">
                 <label>City</label>
                 <input type="text" name="city" id="city">
-
                 <br>
             </div>
 
             <div>
                 <label>Select Country</label>
-                <select>
-                    <option>Australia</option>
-                    <option>other</option>
+                <select name="country" id="country">
+                    <?php
+                        foreach($data['country_list'] as $country)
+                            echo "<option value=".$country['country_name'].">".$country['country_name']."</option>"
+                    ?>
                 </select>
             </div>
 

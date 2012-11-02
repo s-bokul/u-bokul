@@ -11,13 +11,15 @@ class Register extends My_Controller {
 
     public function index()
     {
-        //$this->load->view('welcome_message');
+
         $this->load->helper('form');
-        $data = null;
+        $this->load->model('user_model');
+        $data['country_list'] = $this->user_model->getCountryList();
         $error = null;
         $title = 'Register';
         $this->template->write_view('content','pages/register',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
+        //$this->output->enable_profiler(TRUE);
     }
 
     public function save()
@@ -29,10 +31,8 @@ class Register extends My_Controller {
         {
             $this->form_validation->set_rules('email', 'Email Address', 'required|Email|callback_checkEmailIsUsed');
 
-            $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required|callback_checkMobileIsUsed');
-            $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha');
-            $this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha');
-            $this->form_validation->set_rules('company_name', 'Company Name', 'required|alpha');
+            $this->form_validation->set_rules('fname', 'First Name', 'required|alpha');
+            $this->form_validation->set_rules('lname', 'Last Name', 'required|alpha');
 
 
             if ($this->form_validation->run() == FALSE)
@@ -45,32 +45,13 @@ class Register extends My_Controller {
             }
             else
             {
-                //$this->load->view('formsuccess');
-                $data['password'] = rand(100000,999999);
-                /*
-                              * Include SMPP Config File
-                              */
-
-                include(APPPATH.'config/smpp'.EXT);
                 $this->load->model('user_model');
                 if($this->user_model->create($data))
                 {
-                    $message = "Thanks for join with us. Your password is :".$data['password'];
-
-                    $this->load->library('smpp');
-
-                    $this->smpp->debug= 0;
-
-                    $this->smpp->open($smpp['host'], $smpp['port'], $smpp['system_id'], $smpp['password']);
-
-                    $this->smpp->send_long($smpp['src'], $data['mobile_number'], $message);
-
-                    $this->smpp->close();
-
                     $msg = array(
                         'status' => true,
                         'class' => 'successbox',
-                        'msg' => 'Registration complete successfully.'
+                        'msg' => 'Registration complete successfully. Please check your email to activate your account.'
                     );
 
                     $data = json_encode($msg);
@@ -127,6 +108,20 @@ class Register extends My_Controller {
         return $status;
     }
 
+    function checkParentIsExists($parent_email, $internal = 1)
+    {
+        $status = false;
+        $this->load->model('user_model');
+        if($this->user_model->checkParentIsExists($parent_email))
+        {
+            if($internal == 1)
+                $this->form_validation->set_message('parent_email', 'Parent Email not exists');
+            $status = true;
+        }
+
+        return $status;
+    }
+
 }
 
 if(isset($_GET['email']))
@@ -140,10 +135,10 @@ if(isset($_GET['email']))
     die();
 }
 
-if(isset($_GET['mobile_number']))
+if(isset($_GET['parent_email']))
 {
     $register = new Register();
-    $status = $register->checkMobileIsUsed($_GET['mobile_number'], 0);
+    $status = $register->checkParentIsExists($_GET['parent_email'], 0);
     if($status == true)
         echo 'true';
     else
