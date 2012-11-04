@@ -1,5 +1,5 @@
 <div id="header">
-    <h1 id="logo"><a href="#"><img src="images/logo.jpg" alt=""></a></h1>
+    <h1 id="logo"><a href="#"><img src="<?php echo base_url(); ?>/assets/images/logo.png" alt=""></a></h1>
 
     <ul id="usernav">
 
