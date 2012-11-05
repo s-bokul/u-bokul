@@ -18,16 +18,87 @@ class User_model extends CI_Model{
         $result = $query->result_array();
         return $result;
     }
+
+    public function create_guid($namespace = '') {
+        static $guid = '';
+        $uid = uniqid("", true);
+        $data = $namespace;
+        $data .= $_SERVER['REQUEST_TIME'];
+        $data .= $_SERVER['HTTP_USER_AGENT'];
+        $data .= $_SERVER['REMOTE_ADDR'];
+        $data .= $_SERVER['REMOTE_PORT'];
+        $hash = strtoupper(hash('ripemd128', $uid . $guid . md5($data)));
+        $guid = '' .
+            substr($hash,  0,  8) .
+            '-' .
+            substr($hash,  8,  4) .
+            '-' .
+            substr($hash, 12,  4) .
+            '-' .
+            substr($hash, 16,  4) .
+            '-' .
+            substr($hash, 20, 12) .
+            '';
+        return $guid;
+    }
 	
 	public function create($params){
         $status = false;
         $params['passwd'] = md5($params['passwd']);
+        $params['activating_code'] = $this->create_guid();
+        //print_r($params);
+        $config['charset'] = 'iso-8859-1';
+        $config['mailtype'] = 'html';
+
+        $this->email->initialize($config);
+        $this->email->from('info@ufredis.com', 'UFREDIS');
+        $this->email->to($params['email']);
+
+        $this->email->subject('Activation Link Form UFREDIS');
+        $this->email->message("Hello ".$params['lname']."
+        <br />Please click the link bellow to activate your account. <a href='http://ufredis.local.com/register/activate/".$params['activating_code']."'></a>
+        <br />Thanks<br />Ufredis Team.");
+
+        $this->email->send();
+
+        /*echo $this->email->print_debugger();
+        die();*/
         unset($params['cnf_password']);
         $this->db->set($params);
         if($this->db->insert('user_informations'))
 		$status = true;
         return $status;
 	}
+
+    public function checkActivateID($activation_id)
+    {
+        $status = false;
+        $query = $this->db->get_where('user_informations', array('activating_code' => $activation_id));
+        if($query->num_rows() > 0)
+            $status = true;
+        return $status;
+    }
+
+    public function activate($activation_id)
+    {
+        $result = $this->db->simple_query("UPDATE `user_informations` SET `balance` = 10 WHERE `user_informations`.`activating_code` = '".$activation_id."';");
+
+        $status = false;
+        $data = array(
+            'is_active' => 1,
+            'activating_code' => ''
+        );
+
+        $this->db->where('activating_code', $activation_id);
+        $this->db->update('user_informations', $data);
+
+
+        //echo $this->db->last_query();
+        //die();
+        if($this->db->update('user_informations', $data))
+            $status = true;
+        return $status;
+    }
 	
     public function checkEmailIsUsed($email)
     {
@@ -50,7 +121,8 @@ class User_model extends CI_Model{
     public function checkParentIsExists($parent_email)
     {
         $status = false;
-        $query = $this->db->get_where('user_informations', array('parent_email' => $parent_email));
+        $query = $this->db->get_where('user_informations', array('email' => $parent_email));
+        //echo $this->db->last_query();
         if($query->num_rows() > 0)
             $status = true;
         return $status;

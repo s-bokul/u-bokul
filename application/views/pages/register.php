@@ -10,7 +10,7 @@
         $("#signup").validate({
             rules: {
                 email: {required:true, email:true, remote:"/register"},
-                parent_email: { remote:"/register" },
+                parent_email: { email:true, remote:"/register" },
                 passwd: "required",
                 cnf_password: {
                     equalTo: "#passwd"

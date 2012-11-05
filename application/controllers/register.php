@@ -26,6 +26,7 @@ class Register extends My_Controller {
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->load->library('email');
         $data = $this->input->post();
         if($_POST)
         {
@@ -77,6 +78,38 @@ class Register extends My_Controller {
 
         }
 
+    }
+
+    public function activate($activation_id)
+    {
+        $this->load->model('user_model');
+        if($this->user_model->checkActivateID($activation_id))
+        {
+            $this->user_model->activate($activation_id);
+            $msg = array(
+                'status' => true,
+                'class' => 'successbox',
+                'msg' => 'Account Updated successfully. And you got 10$ as bonus.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+        else
+        {
+            $msg = array(
+                'status' => false,
+                'class' => 'errormsgbox',
+                'msg' => 'Wrong Activation Code.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+        redirect('/register');
+        //echo $activation_id;
     }
 
     function checkEmailIsUsed($email, $internal = 1)
