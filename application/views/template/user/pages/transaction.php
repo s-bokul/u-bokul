@@ -1,64 +1,27 @@
 <h1 class="pagetitle">Transaction History</h1>
-<table class="defaulttable historytable">
-    <tr>
-        <th>Delivery Time</th>
-        <th>Campaign Name</th>
-        <th>Size</th>
-        <th>Cost </th>
-        <th>Delivered</th>
-        <th>Undelivered</th>
-        <th>Status</th>
-    </tr>
-    <tr>
-        <td>5/4/2012 4:28:50 PM</td>
-        <td>SMS Hub</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>0</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td>5/4/2012 4:28:50 PM</td>
-        <td>SMS Hub</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>0</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td>5/4/2012 4:28:50 PM</td>
-        <td>SMS Hub</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>0</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td>5/4/2012 4:28:50 PM</td>
-        <td>SMS Hub</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>0</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td>5/4/2012 4:28:50 PM</td>
-        <td>SMS Hub</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>0</td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
-<ul class="page">
-    <li class="page-prev"><a href="#">← Prev</a></li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li class="page-next"><a href="#">Next →</a></li>
-</ul>
+<div style="width: 80%;margin: 0 auto;">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+        <?php foreach($data['transaction_history'] as $transaction_data) { ?>
+        <tr>
+            <td><?php echo $transaction_data['information']; ?></td>
+            <td><?php echo number_format($transaction_data['amount'], 2); ?></td>
+            <td><?php echo $transaction_data['create_date']; ?></td>
+        </tr>
+        <?php } ?>
+    </table>
+    <div class="pagination">
+        <ul><?php echo $this->pagination->create_links(); ?></ul>
+    <!--<ul>
+        <li class="page-prev"><a href="#">← Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li class="page-next"><a href="#">Next →</a></li>
+    </ul>-->
+    </div>
+</div>

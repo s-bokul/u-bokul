@@ -215,6 +215,34 @@ class User_model extends CI_Model{
         return $status;
     }
 
+    public function transaction_history($user_id, $row)
+    {
+        $conditional_array = array(
+            'user_id' => $user_id
+        );
+        $query = $this->db->get_where('balance_history', $conditional_array, 10, $row);
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+        }
+
+        return $result;
+    }
+
+    public function transaction_history_num_rows($user_id)
+    {
+        $conditional_array = array(
+            'user_id' => $user_id
+        );
+        $query = $this->db->get_where('balance_history', $conditional_array);
+        /*if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+        }*/
+
+        return $query->num_rows();
+    }
+
 }
 
 

@@ -187,13 +187,26 @@ class Userpanel extends User_Controller {
 
     public function transaction()
     {
+        $row = $this->uri->segment(3);
         $this->load->model('user_model');
         //$data = null;
         $error = null;
         $title = 'Transaction History';
-        $data = $this->session->userdata('user_info');
+
         $user_info = $this->session->userdata('user_info');
         $user_id = $user_info['user_id'];
+
+        $this->load->library('pagination');
+
+        $config['base_url'] = '/userpanel/transaction';
+        $config['total_rows'] = $this->user_model->transaction_history_num_rows($user_id);
+        $config['per_page'] = 10;
+
+        $this->pagination->initialize($config);
+
+        $data['transaction_history'] = $this->user_model->transaction_history($user_id, $row);
+
+
         /*echo '<pre>';
         print_r($data);
         echo '</pre>';*/
