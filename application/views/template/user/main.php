@@ -9,7 +9,9 @@
     <title>User Panel : <?php echo $title; ?></title>
     <!-- #EndEditable -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
     <link href="<?php echo base_url()."assets/userpanel.css"; ?>" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url()."assets/css/bootstrap.css"; ?>" rel="stylesheet" type="text/css">
 </head>
 
 <body>

@@ -36,13 +36,13 @@ class Userpanel extends User_Controller {
                 break;
 
 
-            case 'about':
-                $this->about();
+            case 'account_details':
+                $this->account_details();
                 break;
 
 
-            case 'successful':
-                $this->display_successful_message();
+            case 'transaction':
+                $this->transaction();
                 break;
 
             default:
@@ -179,8 +179,26 @@ class Userpanel extends User_Controller {
         /*echo '<pre>';
         print_r($data);
         echo '</pre>';*/
-        $this->template->write_view('header', 'template/user/header',array('data'=>$data));
+        //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
         $this->template->write_view('content','template/user/pages/account_details',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+        $this->output->enable_profiler(TRUE);
+    }
+
+    public function transaction()
+    {
+        $this->load->model('user_model');
+        //$data = null;
+        $error = null;
+        $title = 'Transaction History';
+        $data = $this->session->userdata('user_info');
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        /*echo '<pre>';
+        print_r($data);
+        echo '</pre>';*/
+        //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
+        $this->template->write_view('content','template/user/pages/transaction',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
         $this->output->enable_profiler(TRUE);
     }
