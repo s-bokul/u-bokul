@@ -31,6 +31,14 @@ class Userpanel extends User_Controller {
                 $this->purchase_save();
                 break;
 
+            case 'payment':
+                $this->payment();
+                break;
+
+            case 'status':
+                $this->status();
+                break;
+
             case 'investment-save':
                 $this->investment_save();
                 break;
@@ -151,9 +159,16 @@ class Userpanel extends User_Controller {
         $user_info = $this->session->userdata('user_info');
         $user_id = $user_info['user_id'];
         $data_parchase = $this->input->post();
+
+
+
         $data_parchase['user_id'] = $user_id;
-        if($this->user_model->purchase_save($data_parchase))
+
+        if($status = $this->user_model->purchase_save($data_parchase))
         {
+            $data_parchase['insert_id'] = $status;
+            $this->session->set_userdata('data_parchase', $data_parchase);
+
             $msg = array(
                 'status' => true,
                 'class' => 'alert alert-success',
@@ -175,10 +190,80 @@ class Userpanel extends User_Controller {
             $data = json_encode($msg);
 
             $this->session->set_flashdata('msg', $data);
+            redirect('/userpanel/purchase');
         }
 
-        redirect('/userpanel/purchase');
+        redirect('/userpanel/payment');
 
+    }
+
+    public function payment()
+    {
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $error = null;
+        $title = 'Payment';
+        $data['data_parchase'] = $this->session->userdata('data_parchase');
+        //print_r($data['data_parchase']);
+        //die();
+        $this->template->write_view('content','template/user/pages/payment',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
+
+    public function status()
+    {
+        $insert_id = $this->uri->segment(3);
+        $amount = $this->uri->segment(4);
+        $status = $this->uri->segment(5);
+        if($status == md5('fail'))
+        {
+            $this->user_model->update_payment_status($insert_id, 1, $amount, $user_id);
+            $msg = array(
+                'status' => false,
+                'class' => 'alert alert-error',
+                'msg' => 'Request Failed.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+            redirect('/userpanel/purchase');
+        }
+        else if($status == md5('success'))
+        {
+           if($amount == $_GET['lr_amnt'])
+           {
+               $user_info = $this->session->userdata('user_info');
+               $user_id = $user_info['user_id'];
+               $this->load->model('user_model');
+               $this->user_model->update_payment_status($insert_id, 1, $amount, $user_id);
+
+               $msg = array(
+                   'status' => true,
+                   'class' => 'alert alert-success',
+                   'msg' => 'Successfully Received your balance.'
+               );
+
+               $data = json_encode($msg);
+
+               $this->session->set_flashdata('msg', $data);
+               redirect('/userpanel/purchase');
+           }
+        }
+        else
+        {
+            $this->user_model->update_payment_status($insert_id, 1, $amount, $user_id);
+            $msg = array(
+                'status' => false,
+                'class' => 'alert alert-error',
+                'msg' => 'Request Failed.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+            redirect('/userpanel/purchase');
+        }
     }
 
     public function account_details()
@@ -225,7 +310,7 @@ class Userpanel extends User_Controller {
         //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
         $this->template->write_view('content','template/user/pages/transaction',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
-        $this->output->enable_profiler(TRUE);
+        //$this->output->enable_profiler(TRUE);
     }
 
     public function withdraw()

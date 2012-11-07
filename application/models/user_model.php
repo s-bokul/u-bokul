@@ -99,6 +99,27 @@ class User_model extends CI_Model{
             $status = true;
         return $status;
     }
+
+    public function update_payment_status($id, $status, $amount, $user_id)
+    {
+        $data = array(
+            'paid_status' => $status
+        );
+        $this->db->where('purchase_id', $id);
+        $this->db->update('purchase', $data);
+        if($status == 1)
+            $result = $this->db->simple_query("UPDATE `user_informations` SET `balance` = balance+".$amount." WHERE `user_informations`.`user_id` = ".$user_id.";");
+        else
+        {
+            $show_data = array(
+                'show_status' => 0
+            );
+            $this->db->where('purchase_id', $id);
+            $this->db->update('purchase', $data);
+        }
+        return null;
+
+    }
 	
     public function checkEmailIsUsed($email)
     {
@@ -168,7 +189,8 @@ class User_model extends CI_Model{
         $this->db->set($params);
         if($this->db->insert('purchase'))
         {
-            $status = true;
+            //$status = true;
+            $status = $this->db->insert_id();
             $history_data = array(
                 'user_id' => $params['user_id'],
                 'transaction_type' => 'P',
@@ -179,6 +201,7 @@ class User_model extends CI_Model{
             );
             $this->db->set($history_data);
             $this->db->insert('balance_history');
+
         }
 
         return $status;
