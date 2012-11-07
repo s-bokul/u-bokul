@@ -14,9 +14,10 @@
 <div id="headnavcontainer">
 
     <ul id="headnav">
-        <li><a href="userpanel.html" class="selected">Campaign</a></li>
+        <li><a href="userpanel.html">Campaign</a></li>
         <li><a href="userInbox.html">Inbox</a></li>
         <li><a href="/userpanel/transaction">Transaction History</a></li>
+        <li><a href="/userpanel/withdraw">withdraw</a></li>
         <li><a href="/userpanel/new-investment">New Investment</a></li>
         <li><a href="/userpanel/account_details">Settings</a></li>
     </ul>

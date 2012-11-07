@@ -45,6 +45,10 @@ class Userpanel extends User_Controller {
                 $this->transaction();
                 break;
 
+            case 'withdraw':
+                $this->withdraw();
+                break;
+
             default:
                 $this->page_not_found();
                 break;
@@ -182,7 +186,7 @@ class Userpanel extends User_Controller {
         //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
         $this->template->write_view('content','template/user/pages/account_details',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
-        $this->output->enable_profiler(TRUE);
+        //$this->output->enable_profiler(TRUE);
     }
 
     public function transaction()
@@ -214,6 +218,21 @@ class Userpanel extends User_Controller {
         $this->template->write_view('content','template/user/pages/transaction',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
         $this->output->enable_profiler(TRUE);
+    }
+
+    public function withdraw()
+    {
+        $this->load->helper('form');
+        //$data = null;
+        $error = null;
+        $title = 'Withdraw';
+        $data = $this->session->userdata('user_info');
+        /*echo '<pre>';
+        print_r($data);
+        echo '</pre>';*/
+        //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
+        $this->template->write_view('content','template/user/pages/withdraw',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
     }
 
 }
