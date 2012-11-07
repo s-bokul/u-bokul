@@ -102,7 +102,7 @@ class Userpanel extends User_Controller {
         {
             $msg = array(
                 'status' => true,
-                'class' => 'successbox',
+                'class' => 'alert alert-success',
                 'msg' => 'Successfully Invested.'
             );
 
@@ -114,7 +114,7 @@ class Userpanel extends User_Controller {
         {
             $msg = array(
                 'status' => false,
-                'class' => 'errormsgbox',
+                'class' => 'alert alert-error',
                 'msg' => 'Failed please try again.'
             );
 
@@ -152,7 +152,7 @@ class Userpanel extends User_Controller {
         {
             $msg = array(
                 'status' => true,
-                'class' => 'successbox',
+                'class' => 'alert alert-success',
                 'msg' => 'Request Sent Successfully. Your Account balance is update within 24 hours.'
             );
 
@@ -164,7 +164,7 @@ class Userpanel extends User_Controller {
         {
             $msg = array(
                 'status' => false,
-                'class' => 'errormsgbox',
+                'class' => 'alert alert-error',
                 'msg' => 'Request failed please try again.'
             );
 
@@ -249,16 +249,13 @@ class Userpanel extends User_Controller {
         $data_withdraw['user_id'] = $user_id;
         $data['user_info'] = $this->user_model->getUserInfo($user_id);
 
-        //print_r($data['user_info']['balance']);
-        //print_r($data_withdraw);
-        //die();
         if($data['user_info']['balance'] >= $data_withdraw['withdraw_amount'])
         {
             if($this->user_model->withdraw_save($data_withdraw))
             {
                 $msg = array(
                     'status' => true,
-                    'class' => 'successbox',
+                    'class' => 'alert alert-success',
                     'msg' => 'Request Sent Successfully. Your request process within 24 hours.'
                 );
 
@@ -270,7 +267,7 @@ class Userpanel extends User_Controller {
             {
                 $msg = array(
                     'status' => false,
-                    'class' => 'errormsgbox',
+                    'class' => 'alert alert-error',
                     'msg' => 'Request failed please try again.'
                 );
 
@@ -283,7 +280,7 @@ class Userpanel extends User_Controller {
         {
             $msg = array(
                 'status' => false,
-                'class' => 'errormsgbox',
+                'class' => 'alert alert-error',
                 'msg' => 'Request Failed. Not have enough credit'
             );
 

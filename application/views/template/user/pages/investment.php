@@ -18,10 +18,19 @@
 <div id="purchasepage">
 
     <h1 class="pagetitle">New Investment</h1>
-    <?php
-    $message = json_decode($this->session->flashdata('msg'), 1);
-    echo '<div class="'.$message['class'].'" > '.$message['msg'].' </div>'
-    ?>
+    <div style="width: 90%;margin: 0 auto;">
+        <?php
+        $message = json_decode($this->session->flashdata('msg'), 1);
+        if(!empty($message))
+        echo '<div class="'.$message['class'].'" >
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            '.$message['msg'].' </div>';
+        ?>
+        <?php echo validation_errors('<div class="error">', '</div>'); ?>
+        <!--<div class="successbox" > This is a success message Box </div>
+        <div class="warningbox" > This is a warning message Box </div>
+        <div class="errormsgbox" > This is a Error  message Box </div>-->
+    </div>
     <?php echo validation_errors('<div class="error">', '</div>'); ?>
     <?php echo form_open(site_url('/userpanel/investment-save'),array('name'=>'invest','id'=>'invest'));?>
     <table class="purchase defaulttable">

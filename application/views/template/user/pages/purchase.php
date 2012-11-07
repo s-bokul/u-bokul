@@ -20,10 +20,13 @@
 <div id="purchasepage">
 
     <h1 class="pagetitle">Purchase Credit</h1>
-    <div>
+    <div style="width: 90%;margin: 0 auto;">
         <?php
         $message = json_decode($this->session->flashdata('msg'), 1);
-        echo '<div class="'.$message['class'].'" > '.$message['msg'].' </div>'
+        if(!empty($message))
+        echo '<div class="'.$message['class'].'" >
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            '.$message['msg'].' </div>';
         ?>
         <?php echo validation_errors('<div class="error">', '</div>'); ?>
         <!--<div class="successbox" > This is a success message Box </div>
@@ -50,7 +53,7 @@
         </tr>
     </table>
 
-    <button class="tablebtn purchasenext">Next &raquo;</button>
+    <button class="btn btn-primary">Next &raquo;</button>
 
     <?php echo form_close();?>
 
