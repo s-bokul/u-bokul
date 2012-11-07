@@ -49,6 +49,10 @@ class Userpanel extends User_Controller {
                 $this->withdraw();
                 break;
 
+            case 'withdraw-save':
+                $this->withdraw_save();
+                break;
+
             default:
                 $this->page_not_found();
                 break;
@@ -233,6 +237,63 @@ class Userpanel extends User_Controller {
         //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
         $this->template->write_view('content','template/user/pages/withdraw',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
+    }
+
+    public function withdraw_save()
+    {
+        $this->load->model('user_model');
+
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $data_withdraw = $this->input->post();
+        $data_withdraw['user_id'] = $user_id;
+        $data['user_info'] = $this->user_model->getUserInfo($user_id);
+
+        //print_r($data['user_info']['balance']);
+        //print_r($data_withdraw);
+        //die();
+        if($data['user_info']['balance'] >= $data_withdraw['withdraw_amount'])
+        {
+            if($this->user_model->withdraw_save($data_withdraw))
+            {
+                $msg = array(
+                    'status' => true,
+                    'class' => 'successbox',
+                    'msg' => 'Request Sent Successfully. Your request process within 24 hours.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+            else
+            {
+                $msg = array(
+                    'status' => false,
+                    'class' => 'errormsgbox',
+                    'msg' => 'Request failed please try again.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+        }
+        else
+        {
+            $msg = array(
+                'status' => false,
+                'class' => 'errormsgbox',
+                'msg' => 'Request Failed. Not have enough credit'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+
+
+        redirect('/userpanel/withdraw');
     }
 
 }

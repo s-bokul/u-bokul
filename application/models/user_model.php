@@ -184,6 +184,32 @@ class User_model extends CI_Model{
         return $status;
     }
 
+    public function withdraw_save($params){
+        $status = false;
+
+        $result = $this->db->simple_query("UPDATE `user_informations` SET `balance` = balance-".$params['withdraw_amount']." WHERE `user_informations`.`user_id` = ".$params['user_id'].";");
+
+        $params['paid_status'] = 0;
+        $params['create_date'] = date('Y-m-d');
+        $this->db->set($params);
+        if($this->db->insert('withdraw_accounts'))
+        {
+            $status = true;
+            $history_data = array(
+                'user_id' => $params['user_id'],
+                'transaction_type' => 'W',
+                'information' => 'Withdraw Credit',
+                'amount' => $params['withdraw_amount'],
+                'payment_status' => 0,
+                'create_date' => $params['create_date']
+            );
+            $this->db->set($history_data);
+            $this->db->insert('balance_history');
+        }
+
+        return $status;
+    }
+
     public function investment_save($params)
     {
         $status = false;
