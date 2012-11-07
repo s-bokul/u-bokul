@@ -269,6 +269,43 @@ class User_model extends CI_Model{
         return $query->num_rows();
     }
 
+    public function withdraw_history_num_rows($user_id)
+    {
+        $conditional_array = array(
+            'user_id' => $user_id
+        );
+        $query = $this->db->get_where('withdraw_accounts', $conditional_array);
+        /*if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+        }*/
+
+        return $query->num_rows();
+    }
+
+    public function withdraw_history($user_id, $row)
+    {
+        $conditional_array = array(
+            'user_id' => $user_id
+        );
+        //$this->db->order_by("withdraw_id", "desc");
+        $this->db->select('*');
+        $this->db->from('withdraw_accounts');
+        $this->db->where($conditional_array);
+        $this->db->order_by("withdraw_id", "desc");
+        $this->db->limit(10, $row);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            return $result;
+        }
+        else
+            return null;
+
+    }
+
 }
 
 

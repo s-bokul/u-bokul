@@ -51,9 +51,12 @@
 
             </td>
         </tr>
+        <tr>
+            <td colspan="2"><input type="submit" class="btn btn-primary" value="Next >>"></td>
+        </tr>
     </table>
 
-    <button class="btn btn-primary">Next &raquo;</button>
+
 
     <?php echo form_close();?>
 

@@ -53,6 +53,10 @@ class Userpanel extends User_Controller {
                 $this->withdraw_save();
                 break;
 
+            case 'withdraw-history':
+                $this->withdraw_history();
+                break;
+
             default:
                 $this->page_not_found();
                 break;
@@ -291,6 +295,38 @@ class Userpanel extends User_Controller {
 
 
         redirect('/userpanel/withdraw');
+    }
+
+    public function withdraw_history()
+    {
+        $row = $this->uri->segment(3);
+        $this->load->model('user_model');
+        //$data = null;
+        $error = null;
+        $title = 'Withdraw History';
+
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+
+        $this->load->library('pagination');
+
+        $config['base_url'] = '/userpanel/withdraw-history';
+        $config['total_rows'] = $this->user_model->withdraw_history_num_rows($user_id);
+        $config['per_page'] = 10;
+
+        $this->pagination->initialize($config);
+
+        $data['withdraw_history'] = $this->user_model->withdraw_history($user_id, $row);
+
+
+        /*echo '<pre>';
+        print_r($data);
+        echo '</pre>';*/
+        //die();
+        //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
+        $this->template->write_view('content','template/user/pages/withdraw_history',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+        //$this->output->enable_profiler(TRUE);
     }
 
 }
