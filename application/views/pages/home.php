@@ -1,4 +1,4 @@
-<div id="featuredcontent">
+<!--<div id="featuredcontent">
     <div id="featuredtext">
         <h2>Become an SMS Marketing Professional in seconds!</h2>
         <ul>
@@ -63,7 +63,7 @@
                 <h3>Need Help?</h3>
                 <p>We are only a phone call or email away. Our dedicated customer service team is here to help. If you need any assistance please email<br/>
                 <a href="mailto:Info@smshub.com.au">info@smshub.com.au</a></p>
-            </div>-->
+            </div>
 
         </div>
     </div>

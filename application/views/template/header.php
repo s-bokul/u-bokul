@@ -2,11 +2,11 @@
     <div id="innernav">
         <ul id="headnav">
             <li><a href="/">Home</a></li>
-            <li><a href="/pages/price">Price</a></li>
+            <!--<li><a href="/pages/price">Price</a></li>
             <li><a href="/pages/why-sms">Why SMS?</a></li>
             <li><a href="/pages/long-code">Long Code</a></li>
             <li><a href="/pages/other-services">Other Services</a></li>
-            <li><a href="/pages/about">About</a></li>
+            <li><a href="/pages/about">About</a></li>-->
         </ul>
 
         <div id="loginContainer">

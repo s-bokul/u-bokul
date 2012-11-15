@@ -22,7 +22,7 @@
 
 <!-- #EndEditable -->
 
-<?php echo $footer; ?>
+<?php $footer; ?>
 
 
 <!-- WRAPPER ENDS -->
