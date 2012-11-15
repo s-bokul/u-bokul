@@ -14,10 +14,15 @@
 <div id="headnavcontainer">
 
     <ul id="headnav">
-        <!--<li><a href="userpanel.html">Campaign</a></li>
-        <li><a href="userInbox.html">Inbox</a></li>-->
+        <li><a href="/userpanel">Home</a></li>
+        <!--<li><a href="userInbox.html">Inbox</a></li>-->
         <li><a href="/userpanel/transaction">Transaction History</a></li>
-        <li><a href="/userpanel/withdraw">Withdraw</a></li>
+        <li><a href="/userpanel/withdraw">Withdraw</a>
+            <ul>
+                <li><a href="/userpanel/withdraw">Withdraw</a></li>
+                <li><a href="/userpanel/withdraw-history">Withdraw History</a></li>
+            </ul>
+        </li>
         <li><a href="/userpanel/new-investment">New Investment</a></li>
         <li><a href="/userpanel/purchase">Purchase Credit</a></li>
     </ul>

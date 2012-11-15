@@ -83,7 +83,7 @@ class Userpanel extends User_Controller {
         $error = null;
         $title = 'Campaign';
         //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
-        $this->template->write_view('content','template/user/pages/campaign',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->write_view('content','template/user/pages/home',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
     }
 

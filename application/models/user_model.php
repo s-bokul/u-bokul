@@ -194,6 +194,7 @@ class User_model extends CI_Model{
             $history_data = array(
                 'user_id' => $params['user_id'],
                 'transaction_type' => 'P',
+                'transaction_d_c_type' => 'C',
                 'information' => 'Purchase Credit',
                 'amount' => $params['amount'],
                 'payment_status' => 0,
@@ -221,6 +222,7 @@ class User_model extends CI_Model{
             $history_data = array(
                 'user_id' => $params['user_id'],
                 'transaction_type' => 'W',
+                'transaction_d_c_type' => 'D',
                 'information' => 'Withdraw Credit',
                 'amount' => $params['withdraw_amount'],
                 'payment_status' => 0,
@@ -250,6 +252,7 @@ class User_model extends CI_Model{
                 $history_data = array(
                     'user_id' => $params['user_id'],
                     'transaction_type' => 'I',
+                    'transaction_d_c_type' => 'D',
                     'information' => 'Invest Credit',
                     'amount' => $params['investment_amount'],
                     'payment_status' => 1,
