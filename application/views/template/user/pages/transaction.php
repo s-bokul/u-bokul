@@ -6,7 +6,10 @@
             <th>Amount</th>
             <th>Date</th>
         </tr>
-        <?php foreach($data['transaction_history'] as $transaction_data) { ?>
+        <?php
+        if($data['transaction_history'])
+            foreach($data['transaction_history'] as $transaction_data) {
+        ?>
         <tr>
             <td><?php echo $transaction_data['information']; ?></td>
             <td><?php echo number_format($transaction_data['amount'], 2); ?></td>

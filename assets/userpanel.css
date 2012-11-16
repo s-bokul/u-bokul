@@ -702,6 +702,13 @@ ul.settingpage{
 	background-color:#FFFEDB;
 }
 
+.usersettingtable input[type=password]{
+    width:250px;
+    height:22px;
+    font-size:14px;
+    background-color:#FFFEDB;
+}
+
 .usersettingtable input[type=text]:focus{
 	background-color:#fff;
 }

@@ -5,6 +5,7 @@
 
         $("#withdraw").validate({
             rules: {
+                pin:{ required:true },
                 withdraw_amount: {required:true, number: true, min: 20},
                 account_no: { required:true }
             }
@@ -33,9 +34,15 @@
     <div class="errormsgbox" > This is a Error  message Box </div>-->
 </div>
 
-<?php echo form_open(site_url('/userpanel/withdraw-save'),array('name'=>'withdraw','id'=>'withdraw', 'class'=>'signup'));?>
+<?php echo form_open(site_url('/userpanel/withdraw-save'),array('name'=>'withdraw','id'=>'withdraw', 'class'=>''));?>
 
 <table class="usersettingtable">
+    <tr>
+        <td>Pin<span class="req">*</span></td>
+        <td class="leftalign">
+            <input type="password" name="pin" id="pin" value="">
+        </td>
+    </tr>
     <tr>
         <td>Withdraw Amount<span class="req">*</span></td>
         <td class="leftalign">
@@ -52,7 +59,7 @@
     <tr>
         <td>Liberty Account No<span class="req">*</span></td>
         <td class="leftalign">
-            <input type="text" name="account_no" id="account_no" value="Liberty">
+            <input type="text" name="account_no" id="account_no">
         </td>
     </tr>
     <tr>

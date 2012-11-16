@@ -295,10 +295,12 @@ class User_model extends CI_Model{
 
     public function transaction_history($user_id, $row)
     {
+        $result = null;
         $conditional_array = array(
             'user_id' => $user_id
         );
         $query = $this->db->get_where('balance_history', $conditional_array, 10, $row);
+        //echo $this->db->last_query();
         if($query->num_rows() > 0)
         {
             $result = $query->result_array();
@@ -313,10 +315,6 @@ class User_model extends CI_Model{
             'user_id' => $user_id
         );
         $query = $this->db->get_where('balance_history', $conditional_array);
-        /*if($query->num_rows() > 0)
-        {
-            $result = $query->result_array();
-        }*/
 
         return $query->num_rows();
     }
@@ -327,10 +325,6 @@ class User_model extends CI_Model{
             'user_id' => $user_id
         );
         $query = $this->db->get_where('withdraw_accounts', $conditional_array);
-        /*if($query->num_rows() > 0)
-        {
-            $result = $query->result_array();
-        }*/
 
         return $query->num_rows();
     }

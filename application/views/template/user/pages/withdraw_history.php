@@ -12,7 +12,10 @@
             <th>Status</th>
             <th>Date</th>
         </tr>
-        <?php foreach($data['withdraw_history'] as $withdraw_history) { ?>
+        <?php
+        if($data['withdraw_history'])
+            foreach($data['withdraw_history'] as $withdraw_history) {
+        ?>
         <tr>
             <td><?php echo $withdraw_history['account_no']; ?></td>
             <td><?php echo $withdraw_history['withdraw_mathod']; ?></td>

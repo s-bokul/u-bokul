@@ -512,26 +512,43 @@ class Userpanel extends User_Controller {
         $data_withdraw['user_id'] = $user_id;
         $data['user_info'] = $this->user_model->getUserInfo($user_id);
 
-        if($data['user_info']['balance'] >= $data_withdraw['withdraw_amount'])
+        if($this->user_model->check_pin($data_withdraw['pin'], $user_id))
         {
-            if($this->user_model->withdraw_save($data_withdraw))
+            unset($data_withdraw['pin']);
+
+            if($data['user_info']['balance'] >= $data_withdraw['withdraw_amount'])
             {
-                $msg = array(
-                    'status' => true,
-                    'class' => 'alert alert-success',
-                    'msg' => 'Request Sent Successfully. Your request process within 24 hours.'
-                );
+                if($this->user_model->withdraw_save($data_withdraw))
+                {
+                    $msg = array(
+                        'status' => true,
+                        'class' => 'alert alert-success',
+                        'msg' => 'Request Sent Successfully. Your request will be processed within 24 hours.'
+                    );
 
-                $data = json_encode($msg);
+                    $data = json_encode($msg);
 
-                $this->session->set_flashdata('msg', $data);
+                    $this->session->set_flashdata('msg', $data);
+                }
+                else
+                {
+                    $msg = array(
+                        'status' => false,
+                        'class' => 'alert alert-error',
+                        'msg' => 'Request failed please try again.'
+                    );
+
+                    $data = json_encode($msg);
+
+                    $this->session->set_flashdata('msg', $data);
+                }
             }
             else
             {
                 $msg = array(
                     'status' => false,
                     'class' => 'alert alert-error',
-                    'msg' => 'Request failed please try again.'
+                    'msg' => 'Request Failed. Not have enough credit'
                 );
 
                 $data = json_encode($msg);
@@ -544,7 +561,7 @@ class Userpanel extends User_Controller {
             $msg = array(
                 'status' => false,
                 'class' => 'alert alert-error',
-                'msg' => 'Request Failed. Not have enough credit'
+                'msg' => 'Wrong Pin Code.'
             );
 
             $data = json_encode($msg);
