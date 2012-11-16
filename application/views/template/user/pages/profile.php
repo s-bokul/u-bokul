@@ -21,9 +21,20 @@
 
         $("#changePassword").validate({
             rules: {
+                pins: { required:true },
                 passwd: "required",
                 cnf_password: {
                     equalTo: "#passwd"
+                }
+            }
+        });
+
+        $("#changePin").validate({
+            rules: {
+                passwd1: { required:true },
+                pin: "required",
+                cnf_pin: {
+                    equalTo: "#pin"
                 }
             }
         });
@@ -202,7 +213,7 @@
                             Enter Pin
                         </td>
                         <td>
-                            <input type="password" id="pin" name="pin">
+                            <input type="password" id="pins" name="pins">
                         </td>
                     </tr>
                     <tr>
@@ -215,7 +226,39 @@
             </div>
 
             <div class="tab-pane" id="change_pin">
-                asdasdsad
+                <?php echo form_open(site_url('/userpanel/change-pin'),array('name'=>'changePin','id'=>'changePin', 'class'=>'signup'));?>
+                <table class="table table-striped">
+                    <tr>
+                        <td class="text-info">
+                            New Pin
+                        </td>
+                        <td>
+                            <input type="password" id="pin" name="pin">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Retype Pin
+                        </td>
+                        <td>
+                            <input type="password" id="cnf_pin" name="cnf_pin">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Enter Password
+                        </td>
+                        <td>
+                            <input type="password" id="passwd1" name="passwd1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" class="btn btn-primary">Change Pin</button>
+                        </td>
+                    </tr>
+                </table>
+                <?php echo form_close();?>
             </div>
         </div>
     </div>

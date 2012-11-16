@@ -535,6 +535,70 @@ class User_model extends CI_Model{
             return $val;
     }
 
+    public function check_pin($pin, $user_id)
+    {
+        $status = false;
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'pin' => $pin
+        );
+        $this->db->select('*');
+        $this->db->from('user_informations');
+        $this->db->where($conditional_array);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            $status = true;
+        }
+
+        return $status;
+    }
+
+    public function change_pin($pin, $user_id)
+    {
+        $status = false;
+        $params = array(
+            'pin' => $pin
+        );
+        $this->db->where('user_id', $user_id);
+        if($this->db->update('user_informations', $params))
+            $status = true;
+        return $status;
+    }
+
+    public function check_password($password, $user_id)
+    {
+        $status = false;
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'passwd' => md5($password)
+        );
+        $this->db->select('*');
+        $this->db->from('user_informations');
+        $this->db->where($conditional_array);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            $status = true;
+        }
+
+        return $status;
+    }
+
+    public function change_password($password, $user_id)
+    {
+        $status = false;
+        $params = array(
+            'passwd' => md5($password)
+        );
+        $this->db->where('user_id', $user_id);
+        if($this->db->update('user_informations', $params))
+            $status = true;
+        return $status;
+    }
+
 }
 
 

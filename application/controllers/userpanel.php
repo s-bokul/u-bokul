@@ -27,6 +27,14 @@ class Userpanel extends User_Controller {
                 $this->profile_save();
                 break;
 
+            case 'change-password':
+                $this->change_password();
+                break;
+
+            case 'change-pin':
+                $this->change_pin();
+                break;
+
             case 'new-investment':
                 $this->new_investment();
                 break;
@@ -139,6 +147,110 @@ class Userpanel extends User_Controller {
                 'status' => false,
                 'class' => 'alert alert-error',
                 'msg' => 'Failed please try again.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+
+        redirect('/userpanel/profile');
+    }
+
+    public function change_password()
+    {
+        $this->load->model('user_model');
+
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $data_password = $this->input->post();
+
+        if($this->user_model->check_pin($data_password['pins'], $user_id))
+        {
+            if($this->user_model->change_password($data_password['passwd'], $user_id))
+            {
+                $msg = array(
+                    'status' => true,
+                    'class' => 'alert alert-success',
+                    'msg' => 'Password Successfully Changed.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+            else
+            {
+                $msg = array(
+                    'status' => false,
+                    'class' => 'alert alert-error',
+                    'msg' => 'Failed To Change Password. Please Try Again.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+
+        }
+        else
+        {
+            $msg = array(
+                'status' => false,
+                'class' => 'alert alert-error',
+                'msg' => 'Wrong Pin Code.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+
+        redirect('/userpanel/profile');
+    }
+
+    public function change_pin()
+    {
+        $this->load->model('user_model');
+
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $data_password = $this->input->post();
+
+        if($this->user_model->check_password($data_password['passwd1'], $user_id))
+        {
+            if($this->user_model->change_pin($data_password['pin'], $user_id))
+            {
+                $msg = array(
+                    'status' => true,
+                    'class' => 'alert alert-success',
+                    'msg' => 'Pin Successfully Changed.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+            else
+            {
+                $msg = array(
+                    'status' => false,
+                    'class' => 'alert alert-error',
+                    'msg' => 'Failed To Change Pin. Please Try Again.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+
+        }
+        else
+        {
+            $msg = array(
+                'status' => false,
+                'class' => 'alert alert-error',
+                'msg' => 'Wrong Password.'
             );
 
             $data = json_encode($msg);
