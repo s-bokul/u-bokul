@@ -369,11 +369,10 @@ class User_model extends CI_Model{
         $val = 0;
         $conditional_array = array(
             'user_id' => $user_id,
-            'payment_status' => 0,
-            'transaction_type' => 'W'
+            'paid_status' => 0,
         );
-        $this->db->select_sum('amount');
-        $this->db->from('balance_history');
+        $this->db->select_sum('withdraw_amount');
+        $this->db->from('withdraw_accounts');
         $this->db->where($conditional_array);
         $query = $this->db->get();
         if($query->num_rows() > 0)

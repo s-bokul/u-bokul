@@ -16,6 +16,12 @@
             <div class="tab-pane active" id="total">
                     <table class="table table-bordered table-hover">
                         <tr>
+                            <th>Title</th>
+                            <th>Amount</th>
+                            <th>Title</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tr>
                             <td>Current Balance</td>
                             <td class="text-info">$ <?php echo $data['user_info']['balance']; ?></td>
                             <td>Total Withdrawals</td>

@@ -1,7 +1,11 @@
 <!-- #BeginEditable "body" -->
 <table width="100%" align="center">
     <tr>
-        <td height="200px"></td>
+        <td height="200px" align="center">
+            <img src="<?php echo base_url(); ?>/assets/images/lr_logo.jpg" alt="">
+        </td>
+    </tr>
+    <tr>
         <td class="" align="center" valign="middle">
             <form method="post" action="https://sci.libertyreserve.com">
                 <input type="hidden" name="lr_acc" value="U1015419">
