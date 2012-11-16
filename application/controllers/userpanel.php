@@ -23,6 +23,10 @@ class Userpanel extends User_Controller {
                 $this->profile();
                 break;
 
+            case 'profile-save':
+                $this->profile_save();
+                break;
+
             case 'new-investment':
                 $this->new_investment();
                 break;
@@ -107,6 +111,42 @@ class Userpanel extends User_Controller {
         $title = 'Profile Information';
         $this->template->write_view('content','template/user/pages/profile',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
+    }
+
+    public function profile_save()
+    {
+        $this->load->model('user_model');
+
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $data_profile = $this->input->post();
+
+        if($this->user_model->profile_update($data_profile, $user_id))
+        {
+            $msg = array(
+                'status' => true,
+                'class' => 'alert alert-success',
+                'msg' => 'Profile Successfully Updated.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+        else
+        {
+            $msg = array(
+                'status' => false,
+                'class' => 'alert alert-error',
+                'msg' => 'Failed please try again.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+
+        redirect('/userpanel/profile');
     }
 
     public function new_investment()

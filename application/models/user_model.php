@@ -182,6 +182,15 @@ class User_model extends CI_Model{
         return $result[0];
     }
 
+    public function profile_update($params, $user_id)
+    {
+        $status = false;
+        $this->db->where('user_id', $user_id);
+        if($this->db->update('user_informations', $params))
+            $status = true;
+        return $status;
+    }
+
     public function purchase_save($params){
         $status = false;
         $params['paid_status'] = 0;

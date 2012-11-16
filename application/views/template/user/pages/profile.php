@@ -1,7 +1,44 @@
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        jQuery.validator.addMethod("names", function(value, element) {
+            //var regval = $(element.outerHTML).attr('regex');
+            return this.optional(element) || /^[a-zA-Z]+$/.test(value);
+        }, "Please Enter Valid Characters");
+
+        $("#profileForm").validate({
+            rules: {
+                fname: { required:true, maxlength: 32, names:true },
+                lname: { required:true, maxlength: 32, names:true }
+            }
+        });
+    });
+
+
+</script>
 <!-- #BeginEditable "body" -->
 <ul class="tab">
 
 </ul>
+<div style="width: 90%;margin: 0 auto;">
+    <?php
+    $message = json_decode($this->session->flashdata('msg'), 1);
+    if(!empty($message))
+        echo '<div class="'.$message['class'].'" >
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            '.$message['msg'].' </div>';
+    ?>
+    <?php echo validation_errors('<div class="error">', '</div>'); ?>
+    <!--<div class="successbox" > This is a success message Box </div>
+    <div class="warningbox" > This is a warning message Box </div>
+    <div class="errormsgbox" > This is a Error  message Box </div>-->
+</div>
 <div style="width:90%;margin:30px auto;">
     <div id="bootStarp">
         <ul class="nav nav-tabs" id="myTab">
@@ -73,7 +110,63 @@
                 </table>
             </div>
             <div class="tab-pane" id="profile">
-                asda
+                <?php echo form_open(site_url('/userpanel/profile-save'),array('name'=>'profileForm','id'=>'profileForm', 'class'=>'signup'));?>
+                <table class="table table-striped">
+                    <tr>
+                        <td class="text-info">
+                            First Name
+                        </td>
+                        <td>
+                            <input type="text" id="fname" name="fname" value="<?php echo $data['user_info']['fname']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Last Name
+                        </td>
+                        <td>
+                            <input type="text" id="lname" name="lname" value="<?php echo $data['user_info']['lname']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Mobile
+                        </td>
+                        <td>
+                            <input type="text" id="mobile" name="mobile" value="<?php echo $data['user_info']['mobile']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Address
+                        </td>
+                        <td>
+                            <input type="text" id="address" name="address" value="<?php echo $data['user_info']['address']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            City
+                        </td>
+                        <td>
+                            <input type="text" id="city" name="city" value="<?php echo $data['user_info']['city']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Country
+                        </td>
+                        <td>
+                            <input type="text" id="country" name="country" value="<?php echo $data['user_info']['country']; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </td>
+                    </tr>
+                </table>
+                <?php echo form_close();?>
             </div>
 
             <div class="tab-pane" id="password">
@@ -85,13 +178,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $('#myTab a').click(function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        })
-    </script>
 </div>
 
 
