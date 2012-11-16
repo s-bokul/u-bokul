@@ -18,6 +18,15 @@
                 lname: { required:true, maxlength: 32, names:true }
             }
         });
+
+        $("#changePassword").validate({
+            rules: {
+                passwd: "required",
+                cnf_password: {
+                    equalTo: "#passwd"
+                }
+            }
+        });
     });
 
 
@@ -45,7 +54,7 @@
             <li class="active"><a href="#profile_info" id="info">Profile Information</a></li>
             <li><a href="#profile" id="pro">Edit Profile</a></li>
             <li><a href="#password" id="pass">Change Password</a></li>
-            <li><a href="#change_pin" id="pin">Change Pin</a></li>
+            <li><a href="#change_pin" id="cng_pin">Change Pin</a></li>
         </ul>
 
         <div class="tab-content">
@@ -170,7 +179,39 @@
             </div>
 
             <div class="tab-pane" id="password">
-                asd
+                <?php echo form_open(site_url('/userpanel/change-password'),array('name'=>'changePassword','id'=>'changePassword', 'class'=>'signup'));?>
+                <table class="table table-striped">
+                    <tr>
+                        <td class="text-info">
+                            New Password
+                        </td>
+                        <td>
+                            <input type="password" id="passwd" name="passwd">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Retype Password
+                        </td>
+                        <td>
+                            <input type="password" id="cnf_password" name="cnf_password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Enter Pin
+                        </td>
+                        <td>
+                            <input type="password" id="pin" name="pin">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                        </td>
+                    </tr>
+                </table>
+                <?php echo form_close();?>
             </div>
 
             <div class="tab-pane" id="change_pin">
