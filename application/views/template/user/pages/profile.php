@@ -1,4 +1,7 @@
 <!-- #BeginEditable "body" -->
+<ul class="tab">
+
+</ul>
 <div style="width:90%;margin:30px auto;">
     <div id="bootStarp">
         <ul class="nav nav-tabs" id="myTab">
@@ -10,7 +13,64 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="profile_info">
-                    dasd
+                <table class="table table-striped">
+                   <tr>
+                       <td class="text-info">
+                           First Name
+                       </td>
+                       <td>
+                           <?php echo $data['user_info']['fname']; ?>
+                       </td>
+                   </tr>
+                    <tr>
+                        <td class="text-info">
+                            Last Name
+                        </td>
+                        <td>
+                            <?php echo $data['user_info']['lname']; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Email
+                        </td>
+                        <td>
+                            <?php echo $data['user_info']['email']; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Mobile
+                        </td>
+                        <td>
+                            <?php echo $data['user_info']['mobile']; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Address
+                        </td>
+                        <td>
+                            <?php echo $data['user_info']['address']; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            City
+                        </td>
+                        <td>
+                            <?php echo $data['user_info']['city']; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">
+                            Country
+                        </td>
+                        <td>
+                            <?php echo $data['user_info']['country']; ?>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="tab-pane" id="profile">
                 asda
@@ -31,7 +91,6 @@
             e.preventDefault();
             $(this).tab('show');
         })
-
     </script>
 </div>
 

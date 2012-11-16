@@ -3,18 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2012 at 09:58 PM
+-- Generation Time: Nov 16, 2012 at 01:49 PM
 -- Server version: 5.1.63-0ubuntu0.11.04.1
--- PHP Version: 5.3.5-1ubuntu7.10
+-- PHP Version: 5.3.5-1ubuntu7.11
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `ufredis`
@@ -29,56 +23,39 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `balance_history` (
   `history_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `transaction_type` varchar(10) NOT NULL COMMENT '(W-withdraw, I-Invest, C-Comission, P-Payment From Gateway)',
+  `transaction_type` varchar(10) NOT NULL COMMENT '(W-withdraw, I-Invest, C-Comission, P-Payment From Gateway, R-Returning Amount)',
+  `transaction_d_c_type` varchar(10) NOT NULL COMMENT '(C-Credit, D-Debit)',
   `information` text NOT NULL,
   `amount` float NOT NULL,
   `payment_status` tinyint(1) NOT NULL DEFAULT '1',
   `create_date` datetime NOT NULL,
   `modified_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`history_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `balance_history`
 --
 
-INSERT INTO `balance_history` (`history_id`, `user_id`, `transaction_type`, `information`, `amount`, `payment_status`, `create_date`, `modified_date`) VALUES
-(1, 1, 'C', 'For interest', 5, 0, '2012-10-28 22:05:25', '2012-10-28 10:05:05'),
-(2, 1, 'C', 'For interest', 5, 0, '2012-10-28 16:17:02', '2012-10-28 10:17:02'),
-(3, 1, 'C', 'For interest', 5, 0, '2012-10-28 16:22:02', '2012-10-28 10:22:02'),
-(4, 1, 'I', 'For interest', 2, 0, '2012-10-30 16:52:17', '2012-10-30 10:52:17'),
-(5, 1, 'I', 'For interest', 2, 0, '2012-10-30 16:52:17', '2012-10-30 10:52:17'),
-(6, 1, 'I', 'For interest', 2, 0, '2012-10-30 16:53:17', '2012-10-30 10:53:17'),
-(7, 1, 'I', 'For interest', 2, 0, '2012-10-30 16:53:17', '2012-10-30 10:53:17'),
-(8, 1, 'I', 'For interest', 2, 0, '2012-10-30 16:54:17', '2012-10-30 10:54:17'),
-(9, 1, 'I', 'For interest', 2, 0, '2012-10-30 16:54:17', '2012-10-30 10:54:17'),
-(10, 1, 'I', 'For interest', 2, 0, '2012-10-30 16:55:17', '2012-10-30 10:55:17'),
-(11, 1, 'I', 'For interest', 2, 0, '2012-10-30 16:55:17', '2012-10-30 10:55:17'),
-(12, 1, 'P', 'Purchase Credit', 50, 0, '2012-11-02 00:00:00', '2012-11-02 15:09:06'),
-(13, 1, 'I', 'Invest Credit', 20, 1, '2012-11-02 00:00:00', '2012-11-02 15:24:38'),
-(14, 1, 'I', 'Invest Credit', 20, 1, '2012-11-02 00:00:00', '2012-11-02 15:37:08'),
-(15, 1, 'P', 'Purchase Credit', 50, 0, '2012-11-06 00:00:00', '2012-11-06 16:14:35'),
-(16, 1, 'W', 'Withdraw Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 14:14:42'),
-(17, 1, 'W', 'Withdraw Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 14:18:55'),
-(18, 1, 'W', 'Withdraw Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 14:19:33'),
-(19, 1, 'W', 'Withdraw Credit', 50, 0, '2012-11-07 00:00:00', '2012-11-07 14:19:45'),
-(20, 1, 'W', 'Withdraw Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 14:26:30'),
-(21, 1, 'W', 'Withdraw Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 14:26:35'),
-(22, 1, 'W', 'Withdraw Credit', 23, 0, '2012-11-07 00:00:00', '2012-11-07 14:26:45'),
-(23, 1, 'W', 'Withdraw Credit', 32, 0, '2012-11-07 00:00:00', '2012-11-07 14:26:48'),
-(24, 1, 'W', 'Withdraw Credit', 23, 0, '2012-11-07 00:00:00', '2012-11-07 14:26:51'),
-(25, 1, 'W', 'Withdraw Credit', 23, 0, '2012-11-07 00:00:00', '2012-11-07 14:26:54'),
-(26, 1, 'W', 'Withdraw Credit', 32, 0, '2012-11-07 00:00:00', '2012-11-07 14:26:57'),
-(27, 1, 'W', 'Withdraw Credit', 23, 0, '2012-11-07 00:00:00', '2012-11-07 14:27:00'),
-(28, 1, 'P', 'Purchase Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 14:56:21'),
-(29, 1, 'P', 'Purchase Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 14:58:55'),
-(30, 1, 'P', 'Purchase Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 15:10:39'),
-(31, 1, 'P', 'Purchase Credit', 10, 0, '2012-11-07 00:00:00', '2012-11-07 15:12:02'),
-(32, 1, 'P', 'Purchase Credit', 10, 0, '2012-11-07 00:00:00', '2012-11-07 15:12:51'),
-(33, 1, 'P', 'Purchase Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 15:26:56'),
-(34, 1, 'P', 'Purchase Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 15:28:01'),
-(35, 1, 'P', 'Purchase Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 15:47:19'),
-(36, 1, 'P', 'Purchase Credit', 50, 0, '2012-11-07 00:00:00', '2012-11-07 15:48:38');
+INSERT INTO `balance_history` (`history_id`, `user_id`, `transaction_type`, `transaction_d_c_type`, `information`, `amount`, `payment_status`, `create_date`, `modified_date`) VALUES
+(1, 1, 'C', 'C', 'For interest', 5, 0, '2012-10-28 22:05:25', '2012-10-28 10:05:05'),
+(2, 1, 'C', 'C', 'For interest', 5, 0, '2012-10-28 16:17:02', '2012-10-28 10:17:02'),
+(3, 1, 'C', 'C', 'For interest', 5, 0, '2012-10-28 16:22:02', '2012-10-28 10:22:02'),
+(4, 1, 'I', '', 'For interest', 2, 0, '2012-10-30 16:52:17', '2012-10-30 10:52:17'),
+(5, 1, 'I', '', 'For interest', 2, 0, '2012-10-30 16:52:17', '2012-10-30 10:52:17'),
+(6, 1, 'I', '', 'For interest', 2, 0, '2012-10-30 16:53:17', '2012-10-30 10:53:17'),
+(7, 1, 'I', '', 'For interest', 2, 0, '2012-10-30 16:53:17', '2012-10-30 10:53:17'),
+(8, 1, 'I', '', 'For interest', 2, 0, '2012-10-30 16:54:17', '2012-10-30 10:54:17'),
+(9, 1, 'I', '', 'For interest', 2, 0, '2012-10-30 16:54:17', '2012-10-30 10:54:17'),
+(10, 1, 'I', '', 'For interest', 2, 0, '2012-10-30 16:55:17', '2012-10-30 10:55:17'),
+(11, 1, 'I', '', 'For interest', 2, 0, '2012-10-30 16:55:17', '2012-10-30 10:55:17'),
+(12, 1, 'P', '', 'Purchase Credit', 50, 0, '2012-11-02 00:00:00', '2012-11-02 15:09:06'),
+(13, 1, 'I', '', 'Invest Credit', 20, 1, '2012-11-02 00:00:00', '2012-11-02 15:24:38'),
+(14, 1, 'I', '', 'Invest Credit', 20, 1, '2012-11-02 00:00:00', '2012-11-02 15:37:08'),
+(15, 1, 'W', '', 'Withdraw Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 05:39:16'),
+(16, 1, 'W', '', 'Withdraw Credit', 20, 0, '2012-11-07 00:00:00', '2012-11-07 05:44:34'),
+(17, 1, 'I', '', 'Invest Credit', 20, 1, '2012-11-07 00:00:00', '2012-11-07 05:47:45'),
+(18, 1, 'P', '', 'Purchase Credit', 80, 0, '2012-11-07 00:00:00', '2012-11-07 05:47:58');
 
 -- --------------------------------------------------------
 
@@ -327,17 +304,18 @@ CREATE TABLE IF NOT EXISTS `investments` (
   `modifying_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `draw_count` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`investment_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `investments`
 --
 
 INSERT INTO `investments` (`investment_id`, `user_id`, `investment_amount`, `payment_method`, `payment_status`, `created_date`, `modifying_date`, `draw_count`) VALUES
-(1, 1, 100, '', 0, '2012-10-30', '2012-10-30 10:55:17', 4),
+(1, 1, 100, '', 0, '2012-10-30', '2012-11-16 05:47:29', 72),
 (2, 1, 20, 'account', 1, '2012-11-02', '2012-11-02 15:23:52', 0),
 (3, 1, 20, 'account', 1, '2012-11-02', '2012-11-02 15:24:38', 0),
-(4, 1, 20, 'From Account Balance', 1, '2012-11-02', '2012-11-02 15:37:08', 0);
+(4, 1, 20, 'From Account Balance', 1, '2012-11-02', '2012-11-02 15:37:08', 0),
+(5, 1, 20, 'From Account Balance', 1, '2012-11-07', '2012-11-07 05:47:45', 0);
 
 -- --------------------------------------------------------
 
@@ -351,33 +329,23 @@ CREATE TABLE IF NOT EXISTS `purchase` (
   `amount` float NOT NULL,
   `payment_method` varchar(100) NOT NULL,
   `paid_status` tinyint(1) NOT NULL,
-  `show_status` tinyint(4) NOT NULL DEFAULT '1',
   `date_created` date NOT NULL,
   `modifying_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`purchase_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `purchase`
 --
 
-INSERT INTO `purchase` (`purchase_id`, `user_id`, `amount`, `payment_method`, `paid_status`, `show_status`, `date_created`, `modifying_date`) VALUES
-(1, 1, 50, 'Liberty', 0, 0, '2012-11-02', '2012-11-02 14:55:41'),
-(2, 1, 50, 'Liberty', 0, 0, '2012-11-02', '2012-11-02 14:57:04'),
-(3, 1, 50, 'Liberty', 0, 0, '2012-11-02', '2012-11-02 14:58:41'),
-(4, 1, 20, 'Liberty', 0, 0, '2012-11-02', '2012-11-02 14:59:21'),
-(5, 1, 50, 'Liberty', 0, 0, '2012-11-02', '2012-11-02 15:08:21'),
-(6, 1, 50, 'Liberty', 0, 0, '2012-11-02', '2012-11-02 15:09:06'),
-(7, 1, 50, 'Liberty', 0, 0, '2012-11-06', '2012-11-06 16:14:35'),
-(8, 1, 20, 'Liberty', 0, 0, '2012-11-07', '2012-11-07 14:56:21'),
-(9, 1, 20, 'Liberty', 0, 0, '2012-11-07', '2012-11-07 14:58:55'),
-(10, 1, 20, 'Liberty', 0, 0, '2012-11-07', '2012-11-07 15:10:39'),
-(11, 1, 10, 'Liberty', 0, 0, '2012-11-07', '2012-11-07 15:12:02'),
-(12, 1, 10, 'Liberty', 0, 0, '2012-11-07', '2012-11-07 15:12:51'),
-(13, 1, 20, 'Liberty', 0, 0, '2012-11-07', '2012-11-07 15:26:56'),
-(14, 1, 20, 'Liberty', 1, 0, '2012-11-07', '2012-11-07 15:28:01'),
-(15, 1, 20, 'Liberty', 0, 1, '2012-11-07', '2012-11-07 15:47:19'),
-(16, 1, 50, 'Liberty', 0, 1, '2012-11-07', '2012-11-07 15:48:38');
+INSERT INTO `purchase` (`purchase_id`, `user_id`, `amount`, `payment_method`, `paid_status`, `date_created`, `modifying_date`) VALUES
+(1, 1, 50, 'Liberty', 0, '2012-11-02', '2012-11-02 14:55:41'),
+(2, 1, 50, 'Liberty', 0, '2012-11-02', '2012-11-02 14:57:04'),
+(3, 1, 50, 'Liberty', 0, '2012-11-02', '2012-11-02 14:58:41'),
+(4, 1, 20, 'Liberty', 0, '2012-11-02', '2012-11-02 14:59:21'),
+(5, 1, 50, 'Liberty', 0, '2012-11-02', '2012-11-02 15:08:21'),
+(6, 1, 50, 'Liberty', 0, '2012-11-02', '2012-11-02 15:09:06'),
+(7, 1, 80, 'Liberty', 0, '2012-11-07', '2012-11-07 05:47:58');
 
 -- --------------------------------------------------------
 
@@ -394,6 +362,7 @@ CREATE TABLE IF NOT EXISTS `user_informations` (
   `gender` varchar(10) NOT NULL,
   `email` varchar(100) NOT NULL,
   `passwd` varchar(100) NOT NULL,
+  `pin` varchar(50) NOT NULL,
   `balance` float NOT NULL DEFAULT '0',
   `mobile` varchar(30) NOT NULL,
   `birthdate` date NOT NULL,
@@ -405,15 +374,14 @@ CREATE TABLE IF NOT EXISTS `user_informations` (
   `create_date` datetime NOT NULL,
   `modifying_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `user_informations`
 --
 
-INSERT INTO `user_informations` (`user_id`, `parent_user_id`, `parent_email`, `fname`, `lname`, `gender`, `email`, `passwd`, `balance`, `mobile`, `birthdate`, `address`, `city`, `country`, `activating_code`, `is_active`, `create_date`, `modifying_date`) VALUES
-(1, 0, '', 'asd', 'asd', '', 'asdasd@asd.com', 'e10adc3949ba59abbe56e057f20f883e', 794, '123123', '0000-00-00', 'asd', 'asd', 'Afghanistan', '', 1, '0000-00-00 00:00:00', '2012-11-07 15:48:08'),
-(2, 0, 'asdasd@asd.com', 'asd', 'asd', '', 'shakil.bokul@gmail.com', '260ca9dd8a4577fc00b7bd5810298076', 10, '123123', '0000-00-00', 'asd', 'asd', 'Afghanistan', '', 1, '0000-00-00 00:00:00', '2012-11-07 15:34:28');
+INSERT INTO `user_informations` (`user_id`, `parent_user_id`, `parent_email`, `fname`, `lname`, `gender`, `email`, `passwd`, `pin`, `balance`, `mobile`, `birthdate`, `address`, `city`, `country`, `activating_code`, `is_active`, `create_date`, `modifying_date`) VALUES
+(1, 0, '', 'asd', 'asd', '', 'asdasd@asd.com', 'e10adc3949ba59abbe56e057f20f883e', '', 20, '123123', '0000-00-00', 'asd', 'asd', 'Afghanistan', '', 1, '0000-00-00 00:00:00', '2012-11-07 05:47:45');
 
 -- --------------------------------------------------------
 
@@ -432,26 +400,12 @@ CREATE TABLE IF NOT EXISTS `withdraw_accounts` (
   `create_date` date DEFAULT NULL,
   `modifying_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`withdraw_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `withdraw_accounts`
 --
 
 INSERT INTO `withdraw_accounts` (`withdraw_id`, `user_id`, `withdraw_amount`, `withdraw_mathod`, `account_no`, `information`, `paid_status`, `create_date`, `modifying_date`) VALUES
-(1, 1, 20, 'Liberty', 'u1111', NULL, 0, '2012-11-07', '2012-11-07 14:14:42'),
-(2, 1, 20, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 14:18:55'),
-(3, 1, 20, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 14:19:33'),
-(4, 1, 50, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 14:19:45'),
-(5, 1, 20, 'Liberty', '5345325435', NULL, 0, '2012-11-07', '2012-11-07 14:26:30'),
-(6, 1, 20, 'Liberty', '3452345', NULL, 0, '2012-11-07', '2012-11-07 14:26:35'),
-(7, 1, 23, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 14:26:45'),
-(8, 1, 32, 'Liberty', 'Liberty', NULL, 1, '2012-11-07', '2012-11-07 14:26:48'),
-(9, 1, 23, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 14:26:51'),
-(10, 1, 23, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 14:26:54'),
-(11, 1, 32, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 14:26:57'),
-(12, 1, 23, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 14:27:00');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+(1, 1, 20, 'Liberty', 'u1111', NULL, 0, '2012-11-07', '2012-11-07 05:39:16'),
+(2, 1, 20, 'Liberty', 'Liberty', NULL, 0, '2012-11-07', '2012-11-07 05:44:34');

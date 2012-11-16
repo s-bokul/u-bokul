@@ -520,6 +520,7 @@ a.text-error:hover {
   color: #953b39;
 }
 .text-info {
+  font-weight: bold;
   color: #3a87ad;
 }
 a.text-info:hover {
