@@ -15,7 +15,7 @@
 
     <ul id="headnav">
         <li><a href="/userpanel">Home</a></li>
-        <!--<li><a href="userInbox.html">Inbox</a></li>-->
+        <li><a href="/userpanel/profile">Profile Information</a></li>
         <li><a href="/userpanel/transaction">Transaction History</a></li>
         <li><a href="/userpanel/withdraw">Withdraw</a>
             <ul>

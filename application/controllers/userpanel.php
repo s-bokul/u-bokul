@@ -19,6 +19,10 @@ class Userpanel extends User_Controller {
                 $this->index();
                 break;
 
+            case 'profile':
+                $this->profile();
+                break;
+
             case 'new-investment':
                 $this->new_investment();
                 break;
@@ -43,11 +47,9 @@ class Userpanel extends User_Controller {
                 $this->investment_save();
                 break;
 
-
             case 'account_details':
                 $this->account_details();
                 break;
-
 
             case 'transaction':
                 $this->transaction();
@@ -79,11 +81,31 @@ class Userpanel extends User_Controller {
         $user_id = $user_info['user_id'];
         $this->load->model('user_model');
         $data['user_info'] = $this->user_model->getUserInfo($user_id);
+        $data['total_withdraw'] = $this->user_model->total_withdraw($user_id);
+        $data['total_pending'] = $this->user_model->total_pending($user_id);
+        $data['completed_withdraw'] = $this->user_model->completed_withdraw($user_id);
+        $data['total_earning'] = $this->user_model->total_earning($user_id);
+        $data['referral_commission'] = $this->user_model->referral_commission($user_id);
+        $data['active_deposits'] = $this->user_model->active_deposits($user_id);
+        $data['total_deposits'] = $this->user_model->total_deposits($user_id);
 
         $error = null;
         $title = 'Campaign';
         //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
         $this->template->write_view('content','template/user/pages/home',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
+
+    public function profile()
+    {
+        $this->load->helper('form');
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $this->load->model('user_model');
+        $data['user_info'] = $this->user_model->getUserInfo($user_id);
+        $error = null;
+        $title = 'Profile Information';
+        $this->template->write_view('content','template/user/pages/profile',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
     }
 
@@ -413,5 +435,7 @@ class Userpanel extends User_Controller {
         $this->template->render();
         //$this->output->enable_profiler(TRUE);
     }
+
+
 
 }

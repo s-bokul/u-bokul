@@ -332,6 +332,186 @@ class User_model extends CI_Model{
 
     }
 
+    public function total_withdraw($user_id)
+    {
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'transaction_type' => 'W'
+        );
+        $this->db->select_sum('amount');
+        $this->db->from('balance_history');
+        $this->db->where($conditional_array);
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            //print_r($result[0]['amount']);
+            if($result[0]['amount']>0)
+                return $result[0]['amount'];
+            else
+                return 0;
+        }
+        else
+            return 0;
+    }
+
+    public function total_pending($user_id)
+    {
+        $val = 0;
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'payment_status' => 0,
+            'transaction_type' => 'W'
+        );
+        $this->db->select_sum('amount');
+        $this->db->from('balance_history');
+        $this->db->where($conditional_array);
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            //print_r($result[0]['amount']);
+            if($result[0]['amount']>0)
+                return $result[0]['amount'];
+            else
+                return $val;
+        }
+        else
+            return 0;
+    }
+
+    public function total_earning($user_id)
+    {
+        $val = 0;
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'transaction_d_c_type' => 'C'
+        );
+        $this->db->select_sum('amount');
+        $this->db->from('balance_history');
+        $this->db->where($conditional_array);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            //echo $this->db->last_query();
+            $result = $query->result_array();
+            //print_r($result[0]['amount']);
+            if($result[0]['amount']>0)
+                return $result[0]['amount'];
+            else
+                return $val;
+        }
+        else
+            return $val;
+    }
+
+    public function completed_withdraw($user_id)
+    {
+        $val = 0;
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'payment_status' => 1,
+            'transaction_type' => 'W'
+        );
+        $this->db->select_sum('amount');
+        $this->db->from('balance_history');
+        $this->db->where($conditional_array);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            //echo $this->db->last_query();
+            $result = $query->result_array();
+            //print_r($result[0]['amount']);
+            if($result[0]['amount']>0)
+                return $result[0]['amount'];
+            else
+                return $val;
+        }
+        else
+            return $val;
+    }
+
+    public function referral_commission($user_id)
+    {
+        $val = 0;
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'transaction_type' => 'C'
+        );
+        $this->db->select_sum('amount');
+        $this->db->from('balance_history');
+        $this->db->where($conditional_array);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            //echo $this->db->last_query();
+            $result = $query->result_array();
+            //print_r($result[0]['amount']);
+            if($result[0]['amount']>0)
+                return $result[0]['amount'];
+            else
+                return $val;
+        }
+        else
+            return $val;
+    }
+
+    public function active_deposits($user_id)
+    {
+        $val = 0;
+        $conditional_array = array(
+            'user_id' => $user_id,
+        );
+        $this->db->select_sum('investment_amount');
+        $this->db->from('investments');
+        $this->db->where($conditional_array);
+        $this->db->where('draw_count <', 72);
+
+        $query = $this->db->get();
+
+        //echo $this->db->last_query();
+        if($query->num_rows() > 0)
+        {
+            //echo $this->db->last_query();
+            $result = $query->result_array();
+            //print_r($result[0]['amount']);
+            if($result[0]['investment_amount']>0)
+                return $result[0]['investment_amount'];
+            else
+                return $val;
+        }
+        else
+            return $val;
+    }
+
+    public function total_deposits($user_id)
+    {
+        $val = 0;
+        $conditional_array = array(
+            'user_id' => $user_id,
+        );
+        $this->db->select_sum('investment_amount');
+        $this->db->from('investments');
+        $this->db->where($conditional_array);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            //echo $this->db->last_query();
+            $result = $query->result_array();
+            //print_r($result[0]['amount']);
+            if($result[0]['investment_amount']>0)
+                return $result[0]['investment_amount'];
+            else
+                return $val;
+        }
+        else
+            return $val;
+    }
+
 }
 
 
