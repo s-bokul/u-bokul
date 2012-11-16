@@ -2,7 +2,7 @@
 <table width="100%" align="center">
     <tr>
         <td height="200px" align="center">
-            <img src="<?php echo base_url(); ?>/assets/images/lr_logo.jpg" alt="">
+            <img src="<?php echo base_url(); ?>/assets/images/lr_logo.jpg" alt="Liberty Reserve">
         </td>
     </tr>
     <tr>

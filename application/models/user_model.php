@@ -344,19 +344,18 @@ class User_model extends CI_Model{
     public function total_withdraw($user_id)
     {
         $conditional_array = array(
-            'user_id' => $user_id,
-            'transaction_type' => 'W'
+            'user_id' => $user_id
         );
-        $this->db->select_sum('amount');
-        $this->db->from('balance_history');
+        $this->db->select_sum('withdraw_amount');
+        $this->db->from('withdraw_accounts');
         $this->db->where($conditional_array);
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
             $result = $query->result_array();
             //print_r($result[0]['amount']);
-            if($result[0]['amount']>0)
-                return $result[0]['amount'];
+            if($result[0]['withdraw_amount']>0)
+                return $result[0]['withdraw_amount'];
             else
                 return 0;
         }
@@ -379,8 +378,8 @@ class User_model extends CI_Model{
         {
             $result = $query->result_array();
             //print_r($result[0]['amount']);
-            if($result[0]['amount']>0)
-                return $result[0]['amount'];
+            if($result[0]['withdraw_amount']>0)
+                return $result[0]['withdraw_amount'];
             else
                 return $val;
         }
@@ -419,11 +418,10 @@ class User_model extends CI_Model{
         $val = 0;
         $conditional_array = array(
             'user_id' => $user_id,
-            'payment_status' => 1,
-            'transaction_type' => 'W'
+            'paid_status' => 1
         );
-        $this->db->select_sum('amount');
-        $this->db->from('balance_history');
+        $this->db->select_sum('withdraw_amount');
+        $this->db->from('withdraw_accounts');
         $this->db->where($conditional_array);
         $query = $this->db->get();
 
@@ -432,8 +430,8 @@ class User_model extends CI_Model{
             //echo $this->db->last_query();
             $result = $query->result_array();
             //print_r($result[0]['amount']);
-            if($result[0]['amount']>0)
-                return $result[0]['amount'];
+            if($result[0]['withdraw_amount']>0)
+                return $result[0]['withdraw_amount'];
             else
                 return $val;
         }
