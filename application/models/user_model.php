@@ -19,6 +19,23 @@ class User_model extends CI_Model{
         return $result;
     }
 
+    public function getCountryCode($country_name)
+    {
+        $this->db->select('country_code');
+        $this->db->from('int_country_codes');
+        $this->db->where('country_name', $country_name);
+        $query = $this->db->get();
+        //$query = $this->db->get('int_country_codes');
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            return $result[0]['country_code'];
+        }
+
+
+        return null;
+    }
+
     public function create_guid($namespace = '') {
         static $guid = '';
         $uid = uniqid("", true);
@@ -46,6 +63,7 @@ class User_model extends CI_Model{
         $status = false;
         $params['passwd'] = md5($params['passwd']);
         $params['activating_code'] = $this->create_guid();
+        $params['pin'] = rand(1001,9999);
         //print_r($params);
         $config['charset'] = 'iso-8859-1';
         $config['mailtype'] = 'html';
@@ -56,13 +74,12 @@ class User_model extends CI_Model{
 
         $this->email->subject('Activation Link Form UFREDIS');
         $this->email->message("Hello ".$params['lname']."
+        <br />Your Pin Code : ".$params['pin']."
         <br />Please click the link bellow to activate your account. <a href='http://ufredis.local.com/register/activate/".$params['activating_code']."'></a>
         <br />Thanks<br />Ufredis Team.");
 
         $this->email->send();
 
-        /*echo $this->email->print_debugger();
-        die();*/
         unset($params['cnf_password']);
         $this->db->set($params);
         if($this->db->insert('user_informations'))

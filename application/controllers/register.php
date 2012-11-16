@@ -155,6 +155,13 @@ class Register extends My_Controller {
         return $status;
     }
 
+    function getCountryCode($country_name)
+    {
+        $this->load->model('user_model');
+        $country_code = $this->user_model->getCountryCode($country_name);
+        return $country_code;
+    }
+
 }
 
 if(isset($_GET['email']))
@@ -176,6 +183,14 @@ if(isset($_GET['parent_email']))
         echo 'true';
     else
         echo 'false';
+    die();
+}
+
+if(isset($_GET['country']))
+{
+    $register = new Register();
+    $country_code = $register->getCountryCode($_GET['country']);
+    print_r($country_code);
     die();
 }
 /* End of file register.php */

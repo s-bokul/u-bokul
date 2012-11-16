@@ -25,6 +25,15 @@
             }
         });
 
+        $('#country').change(function () {
+            $.get("/register", {
+                country:$('#country').val()
+            }, function (response) {
+                writeMobile('mobile', (response));
+            });
+            return false;
+        });
+
         $("#regbtn").click(function() {
             $('#signup').submit();
         });
@@ -41,6 +50,11 @@
         $(".warningbox").fadeOut(2000);
         $(".errormsgbox").fadeOut(2000);
     });
+
+    function writeMobile(id, response) {
+        $('#'+ id).val(response);
+        //$('#' + id).attr('value',unescape(response));
+    }
 
 
 </script>
@@ -94,6 +108,7 @@
             <div>
                 <label>Select Country</label>
                 <select name="country" id="country">
+                    <option value="">--Select Country--</option>
                     <?php
                         foreach($data['country_list'] as $country)
                             echo "<option value=".$country['country_name'].">".$country['country_name']."</option>"
