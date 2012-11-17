@@ -381,7 +381,7 @@ body{
 	margin-top:25px;
 }
 
-.purchase input[type=text],select{
+.purchase input[type=text]{
 
 	width:200px;
 	text-align:right;

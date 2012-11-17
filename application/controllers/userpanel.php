@@ -458,8 +458,10 @@ class Userpanel extends User_Controller {
 
     public function transaction()
     {
+        $this->load->helper('form');
         $row = $this->uri->segment(3);
         $this->load->model('user_model');
+        //$transaction_type = $_GET['transaction_type'];
         //$data = null;
         $error = null;
         $title = 'Transaction History';
@@ -472,10 +474,17 @@ class Userpanel extends User_Controller {
         $config['base_url'] = '/userpanel/transaction';
         $config['total_rows'] = $this->user_model->transaction_history_num_rows($user_id);
         $config['per_page'] = 10;
+        $data['transaction_history'] = $this->user_model->transaction_history($user_id, $row);
+
+        if(!empty($_GET['transaction_type']))
+        {
+            $data['transaction_history'] = $this->user_model->transaction_history_search($_GET['transaction_type'], $user_id, $row);
+        }
 
         $this->pagination->initialize($config);
 
-        $data['transaction_history'] = $this->user_model->transaction_history($user_id, $row);
+
+
 
 
         /*echo '<pre>';
@@ -595,11 +604,6 @@ class Userpanel extends User_Controller {
         $data['withdraw_history'] = $this->user_model->withdraw_history($user_id, $row);
 
 
-        /*echo '<pre>';
-        print_r($data);
-        echo '</pre>';*/
-        //die();
-        //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
         $this->template->write_view('content','template/user/pages/withdraw_history',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
         //$this->output->enable_profiler(TRUE);

@@ -282,7 +282,7 @@ class User_model extends CI_Model{
                     'information' => 'Invest Credit',
                     'amount' => $params['investment_amount'],
                     'payment_status' => 1,
-                    'create_date' => $params['created_date']
+                    'create_date' => date('Y-m-d h:m:s')
                 );
                 $this->db->set($history_data);
                 $this->db->insert('balance_history');
@@ -299,6 +299,26 @@ class User_model extends CI_Model{
         $conditional_array = array(
             'user_id' => $user_id
         );
+        $this->db->order_by('history_id', 'desc');
+        $query = $this->db->get_where('balance_history', $conditional_array, 10, $row);
+
+        //echo $this->db->last_query();
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+        }
+
+        return $result;
+    }
+
+    public function transaction_history_search($transaction_type, $user_id, $row)
+    {
+        $result = null;
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'transaction_type' => $transaction_type
+        );
+        $this->db->order_by('history_id', 'desc');
         $query = $this->db->get_where('balance_history', $conditional_array, 10, $row);
         //echo $this->db->last_query();
         if($query->num_rows() > 0)
@@ -313,6 +333,17 @@ class User_model extends CI_Model{
     {
         $conditional_array = array(
             'user_id' => $user_id
+        );
+        $query = $this->db->get_where('balance_history', $conditional_array);
+
+        return $query->num_rows();
+    }
+
+    public function transaction_history_search_num_rows($transaction_type, $user_id)
+    {
+        $conditional_array = array(
+            'user_id' => $user_id,
+            'transaction_type' => $transaction_type
         );
         $query = $this->db->get_where('balance_history', $conditional_array);
 

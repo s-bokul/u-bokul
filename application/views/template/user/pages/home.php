@@ -8,8 +8,8 @@
     <div id="bootStarp">
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#total" id="op">Total Information</a></li>
-            <li><a href="#escalated" id="esc">Liberty Reserve</a></li>
-            <li><a href="#recent" id="rec">Recent</a></li>
+            <!--<li><a href="#escalated" id="esc">Liberty Reserve</a></li>
+            <li><a href="#recent" id="rec">Recent</a></li>-->
         </ul>
 
         <div class="tab-content">
@@ -47,7 +47,7 @@
                         </tr>
                     </table>
             </div>
-            <div class="tab-pane" id="escalated">
+            <!--<div class="tab-pane" id="escalated">
                 <div class="progress progress-striped active" style="width: 400px;">
                     <div class="bar" style="width: 100%;text-align: center;"></div>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="progress progress-striped active" style="width: 400px;">
                     <div class="bar" style="width: 100%;text-align: center;"></div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 

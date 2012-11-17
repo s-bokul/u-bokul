@@ -1,5 +1,28 @@
 <h1 class="pagetitle">Transaction History</h1>
+<script type="text/javascript">
+    $(document).ready(function() {
+       $('#transaction_type').change(function(){
+           $('#searchForm').submit();
+       })
+    });
+</script>
 <div style="width: 80%;margin: 0 auto;">
+    <table cellpadding="0" cellspacing="0" width="0">
+        <tr>
+            <td>
+                <?php echo form_open(site_url('/userpanel/transaction'),array('name'=>'searchForm','id'=>'searchForm', 'method'=>'get'));?>
+                Transaction Type :
+                <select name="transaction_type" id="transaction_type">
+                    <option value="">--Select Transaction Type--</option>
+                    <option value="I">Deposite</option>
+                    <option value="R">Daily Return</option>
+                    <option value="C">Level Commission</option>
+                </select>
+                <!--<input type="submit" value="Search" class="btn">-->
+                <?php echo form_close();?>
+            </td>
+        </tr>
+    </table>
     <table class="table table-bordered table-hover">
         <tr>
             <th>Title</th>
