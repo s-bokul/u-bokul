@@ -268,6 +268,7 @@ class Userpanel extends User_Controller {
         $user_info = $this->session->userdata('user_info');
         $user_id = $user_info['user_id'];
         $this->load->model('user_model');
+        //echo $this->user_model->getParentId('asdasd@asd.com');
         $data['user_info'] = $this->user_model->getUserInfo($user_id);
 
         $error = null;

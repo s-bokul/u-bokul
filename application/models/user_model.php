@@ -58,9 +58,28 @@ class User_model extends CI_Model{
             '';
         return $guid;
     }
+
+    public function getParentId($parent_email)
+    {
+        $status = null;
+        $this->db->select('user_id');
+        $this->db->from('user_informations');
+        $this->db->where('email', $parent_email);
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            $status = $result[0]['user_id'];
+        }
+        return $status;
+
+    }
 	
 	public function create($params){
         $status = false;
+
+        $params['parent_user_id'] = $this->getParentId($params['parent_email']);
+
         $params['passwd'] = md5($params['passwd']);
         $params['activating_code'] = $this->create_guid();
         $params['pin'] = rand(1001,9999);
@@ -286,11 +305,120 @@ class User_model extends CI_Model{
                 );
                 $this->db->set($history_data);
                 $this->db->insert('balance_history');
+
+                $this->parent_commission($params['user_id'], $params['investment_amount']);
             }
         }
 
 
         return $status;
+    }
+
+    /*public function insert_balance_history($params)
+    {
+
+    }*/
+
+    public function parent_commission($user_id, $amount)
+    {
+        $status = null;
+        $this->db->select('parent_user_id');
+        $this->db->from('user_informations');
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            $parent1_id = $result[0]['parent_user_id'];
+            if($parent1_id == 0)
+                return;
+            $commission1 = ($amount*8)/100;
+            $query1 = $this->db->simple_query("UPDATE `user_informations` SET `balance` = balance+".$commission1." WHERE `user_informations`.`user_id` = ".$parent1_id.";");
+
+            if($query1)
+            {
+                $status = true;
+                $history_data = array(
+                    'user_id' => $parent1_id,
+                    'transaction_type' => 'C',
+                    'transaction_d_c_type' => 'C',
+                    'information' => 'Referral Investment Commission',
+                    'amount' => $commission1,
+                    'payment_status' => 1,
+                    'create_date' => date('Y-m-d h:m:s')
+                );
+                $this->db->set($history_data);
+                $this->db->insert('balance_history');
+
+            }
+
+            $this->db->select('parent_user_id');
+            $this->db->from('user_informations');
+            $this->db->where('user_id', $parent1_id);
+            $query = $this->db->get();
+            if($query->num_rows() > 0)
+            {
+                $result = $query->result_array();
+                $parent2_id = $result[0]['parent_user_id'];
+                if($parent2_id == 0)
+                    return;
+                $commission2 = ($amount*5)/100;
+                $query2 = $this->db->simple_query("UPDATE `user_informations` SET `balance` = balance+".$commission2." WHERE `user_informations`.`user_id` = ".$parent2_id.";");
+
+                if($query2)
+                {
+                    $status = true;
+                    $history_data = array(
+                        'user_id' => $parent2_id,
+                        'transaction_type' => 'C',
+                        'transaction_d_c_type' => 'C',
+                        'information' => 'Referral Investment Commission',
+                        'amount' => $commission2,
+                        'payment_status' => 1,
+                        'create_date' => date('Y-m-d h:m:s')
+                    );
+                    $this->db->set($history_data);
+                    $this->db->insert('balance_history');
+
+                }
+
+
+            }
+
+            $this->db->select('parent_user_id');
+            $this->db->from('user_informations');
+            $this->db->where('user_id', $parent2_id);
+            $query = $this->db->get();
+            if($query->num_rows() > 0)
+            {
+                $result = $query->result_array();
+                $parent3_id = $result[0]['parent_user_id'];
+                if($parent3_id == 0)
+                    return;
+                $commission3 = ($amount*2)/100;
+                $query3 = $this->db->simple_query("UPDATE `user_informations` SET `balance` = balance+".$commission3." WHERE `user_informations`.`user_id` = ".$parent3_id.";");
+
+                if($query3)
+                {
+                    $status = true;
+                    $history_data = array(
+                        'user_id' => $parent3_id,
+                        'transaction_type' => 'C',
+                        'transaction_d_c_type' => 'C',
+                        'information' => 'Referral Investment Commission',
+                        'amount' => $commission3,
+                        'payment_status' => 1,
+                        'create_date' => date('Y-m-d h:m:s')
+                    );
+                    $this->db->set($history_data);
+                    $this->db->insert('balance_history');
+
+                }
+
+
+            }
+        }
+        return;
     }
 
     public function transaction_history($user_id, $row)
