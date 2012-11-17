@@ -39,8 +39,8 @@
         <?php echo form_open(site_url('login/login_check'),array('name'=>'signin','id'=>'signin', 'class'=>'signup'));?>
 
         <div>
-            <label>Mobile Number</label>
-            <input type="text" name="mobile_number" id="mobile_number">
+            <label>Email</label>
+            <input type="text" name="email" id="email">
         </div>
         <div>
             <label>Password</label>
