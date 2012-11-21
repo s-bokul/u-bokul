@@ -8,8 +8,8 @@
     <div id="bootStarp">
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#total" id="op">Total Information</a></li>
-            <!--<li><a href="#escalated" id="esc">Liberty Reserve</a></li>
-            <li><a href="#recent" id="rec">Recent</a></li>-->
+            <li><a href="#ref" id="Referral">Referral Link</a></li>
+            <li><a href="#wal" id="wallet">Wallet</a></li>
         </ul>
 
         <div class="tab-content">
@@ -47,17 +47,28 @@
                         </tr>
                     </table>
             </div>
-            <!--<div class="tab-pane" id="escalated">
-                <div class="progress progress-striped active" style="width: 400px;">
-                    <div class="bar" style="width: 100%;text-align: center;"></div>
-                </div>
+            <div class="tab-pane" id="ref">
+                <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="left" valign="top">
+                            Your referral link is : <span class="text-info"><?php echo base_url().'register/?ref='.$data['user_info']['email']; ?></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top"><img src="<?php echo base_url(); ?>assets/images/logo.png" border="0" /></td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top">For Banner Copy the following text and paste it where you want </td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top"><input name="textfield" type="text" value="&lt;a href=&quot;http://ufredis.com/register/?ref=<?php echo $data['user_info']['email']; ?>&quot;&gt;&lt;img src=&quot;http://ufredis.com/assets/images/logo.png&quot; border=&quot;0&quot;  /&gt;&lt;/a&gt;" style="width: 600px !important;font-size: 10px;" /></td>
+                    </tr>
+                </table>
             </div>
 
-            <div class="tab-pane" id="recent">
-                <div class="progress progress-striped active" style="width: 400px;">
-                    <div class="bar" style="width: 100%;text-align: center;"></div>
-                </div>
-            </div>-->
+            <div class="tab-pane" id="wal">
+
+            </div>
         </div>
     </div>
 

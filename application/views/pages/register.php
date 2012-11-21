@@ -85,7 +85,7 @@
                 <label>Email Address</label>
                 <input type="text" name="email" id="email">
                 <label>Referel Email Address</label>
-                <input type="text" name="parent_email" id="parent_email">
+                <input type="text" name="parent_email" id="parent_email" value="<?php if(!empty($_GET['ref'])) echo $_GET['ref']; ?>">
             </div>
             <div>
                 <label>Password</label>

@@ -35,7 +35,7 @@
     </div>
 </div><!-- NAVBAR ENDS -->
 <div class="header">
-    <h1><a id="logo" href="http://www.smshub.com.au">SMSHUB Bulk SMS Service</a></h1>
+    <h1><a id="logo" href="http://www.ufredis.com">SMSHUB Bulk SMS Service</a></h1>
     <ul class="social">
         <li><a><span>Find Us on :</span></a></li>
         <li><a href="#" class="fb">Facebook</a></li>
