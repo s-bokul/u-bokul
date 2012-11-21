@@ -190,7 +190,7 @@ class User_model extends CI_Model{
         $status = false;
         $conditional_array = array(
             'email' => $data['email'],
-            'passwd' => md5($data['passwd']),
+            'passwd' => md5($data['passwd1']),
             'is_active' => 1
         );
         $query = $this->db->get_where('user_informations', $conditional_array);

@@ -15,7 +15,7 @@
                 cnf_password: {
                     equalTo: "#passwd"
                 },
-                passwd:{minlength:6},
+                passwd:{ minlength:6 },
                 fname: { required:true, maxlength: 32, names:true },
                 lname: { required:true, maxlength: 32, names:true }
             },

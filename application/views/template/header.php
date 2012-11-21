@@ -21,8 +21,8 @@
                             <input type="text" name="email" id="email"/>
                         </fieldset>
                         <fieldset>
-                            <label for="passwd">Password</label>
-                            <input type="password" name="passwd" id="passwd"/>
+                            <label for="passwd1">Password</label>
+                            <input type="password" name="passwd1" id="passwd1"/>
                         </fieldset>
                         <input type="submit" id="login" value="Sign in"/>
                     </fieldset>
