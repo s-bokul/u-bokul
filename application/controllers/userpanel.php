@@ -473,13 +473,17 @@ class Userpanel extends User_Controller {
         $this->load->library('pagination');
 
         $config['base_url'] = '/userpanel/transaction';
-        $config['total_rows'] = $this->user_model->transaction_history_num_rows($user_id);
+        //$config['total_rows'] = $this->user_model->transaction_history_num_rows($user_id);
         $config['per_page'] = 10;
-        $data['transaction_history'] = $this->user_model->transaction_history($user_id, $row);
 
         if(!empty($_GET['transaction_type']))
         {
             $data['transaction_history'] = $this->user_model->transaction_history_search($_GET['transaction_type'], $user_id, $row);
+        }
+        else
+        {
+            $config['total_rows'] = $this->user_model->transaction_history_num_rows($user_id);
+            $data['transaction_history'] = $this->user_model->transaction_history($user_id, $row);
         }
 
         $this->pagination->initialize($config);
