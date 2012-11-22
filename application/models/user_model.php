@@ -227,6 +227,18 @@ class User_model extends CI_Model{
         return $status;
     }
 
+    public function update_user_account($account, $gateway, $user_id)
+    {
+        $status = false;
+        $params = array(
+            $gateway => $account
+        );
+        $this->db->where('user_id', $user_id);
+        if($this->db->update('user_informations', $params))
+            $status = true;
+        return $status;
+    }
+
     public function purchase_save($params){
         $status = false;
         $params['paid_status'] = 0;

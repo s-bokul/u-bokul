@@ -67,7 +67,30 @@
             </div>
 
             <div class="tab-pane" id="wal">
-
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td>Liberty Reserve</td>
+                        <td>
+                            <?php
+                                if(empty($data['user_info']['liberty_account']))
+                                    echo '<a href="#liberty_account" role="button" class="text-info" data-toggle="modal">Add Liberty Reserve Account</a>';
+                                else
+                                    echo $data['user_info']['liberty_account'];
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Payza</td>
+                        <td>
+                            <?php
+                            if(empty($data['user_info']['payza_account']))
+                                echo '<a href="#payza_account" role="button" class="text-info" data-toggle="modal">Add Payza Account</a>';
+                            else
+                                echo $data['user_info']['payza_account'];
+                            ?>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -80,8 +103,103 @@
 
     </script>
 </div>
+<!-- Modal -->
+<div id="liberty_account" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Add Liberty Reserve Account</h3>
+    </div>
+    <div class="modal-body">
+        <label>Enter Liberty Reserve Account:</label>
+        <p><input type="text" name="liberty_account_number" id="liberty_account_number"></p>
+        <span id="liberty_account_error" style="color: red;"></span>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" id="liberty_save">Save changes</button>
+    </div>
+</div>
 
+<div id="payza_account" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Add Payza Account</h3>
+    </div>
+    <div class="modal-body">
+        <label>Enter Payza Account:</label>
+        <p><input type="text" name="payza_account_number" id="payza_account_number"></p>
+        <span id="payza_account_error" style="color: red;"></span>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" id="payza_save">Save changes</button>
+    </div>
+</div>
 
+<div id="alert_msg" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Status</h3>
+    </div>
+    <div class="modal-body">
+        <p id="alert_message"></p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#liberty_save').click(function () {
+            if($('#liberty_account_number').val()!='')
+            {
+                $.get("/userpanel", {
+                    liberty_account_number:$('#liberty_account_number').val()
+                }, function (response) {
+                    finish('liberty_account', (response));
+                });
+            }
+            else
+            {
+                $('#liberty_account_error').text('Please Enter Account');
+            }
+
+            return false;
+        });
+
+        $('#payza_save').click(function () {
+            if($('#payza_account_number').val()!='')
+            {
+                $.get("/userpanel", {
+                    payza_account_number:$('#payza_account_number').val()
+                }, function (response) {
+                    finish('payza_account', (response));
+                });
+            }
+            else
+            {
+                $('#payza_account_error').text('Please Enter Account');
+            }
+
+            return false;
+        });
+    });
+
+    function finish(id, response) {
+        $('#'+ id).modal('hide');
+        if(response)
+        {
+            $('#alert_message').html('<span style="color:green;">Account Save Successfully.</span>');
+        }
+        else
+            $('#alert_message').html('<span style="color:red;">Account Save Failed. Please Try again.</span>');
+
+        $('#alert_msg').modal('show');
+        setTimeout(function(){
+           window.location = '/userpanel';
+        }, 2000);
+    }
+</script>
 
 
 <!-- #EndEditable -->

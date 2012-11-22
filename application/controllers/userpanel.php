@@ -102,7 +102,7 @@ class Userpanel extends User_Controller {
         $data['total_deposits'] = $this->user_model->total_deposits($user_id);
 
         $error = null;
-        $title = 'Campaign';
+        $title = 'Home';
         //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
         $this->template->write_view('content','template/user/pages/home',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
@@ -610,6 +610,33 @@ class Userpanel extends User_Controller {
         //$this->output->enable_profiler(TRUE);
     }
 
+    public function update_user_account($account, $gateway)
+    {
+        $this->load->model('user_model');
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        return $this->user_model->update_user_account($account, $gateway, $user_id);
+    }
+}
 
+if(!empty($_GET['liberty_account_number']))
+{
+    $user_panel = new Userpanel();
+    $status = $user_panel->update_user_account($_GET['liberty_account_number'], 'liberty_account');
+    if($status == true)
+        echo 'true';
+    else
+        echo 'false';
+    die();
+}
 
+if(!empty($_GET['payza_account_number']))
+{
+    $user_panel = new Userpanel();
+    $status = $user_panel->update_user_account($_GET['payza_account_number'], 'payza_account');
+    if($status == true)
+        echo 'true';
+    else
+        echo 'false';
+    die();
 }
