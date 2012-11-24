@@ -61,7 +61,7 @@ class User_model extends CI_Model{
 
     public function getParentId($parent_email)
     {
-        $status = null;
+        $status = 0;
         $this->db->select('user_id');
         $this->db->from('user_informations');
         $this->db->where('email', $parent_email);
@@ -94,7 +94,7 @@ class User_model extends CI_Model{
         $this->email->subject('Activation Link Form UFREDIS');
         $this->email->message("Hello ".$params['lname']."
         <br />Your Pin Code : ".$params['pin']."
-        <br />Please click the link bellow to activate your account. <a href='http://ufredis.local.com/register/activate/".$params['activating_code']."'></a>
+        <br />Please click the link bellow to activate your account. <a href='http://ufredis.local.com/register/activate/".$params['activating_code']."'>http://ufredis.local.com/register/activate/".$params['activating_code']."</a>
         <br />Thanks<br />Ufredis Team.");
 
         $this->email->send();
