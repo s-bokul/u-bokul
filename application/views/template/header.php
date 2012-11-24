@@ -24,6 +24,10 @@
                             <label for="passwd1">Password</label>
                             <input type="password" name="passwd1" id="passwd1"/>
                         </fieldset>
+                        <fieldset>
+                            <label for="pin">Pin</label>
+                            <input type="password" name="pin" id="pin"/>
+                        </fieldset>
                         <input type="submit" id="login" value="Sign in"/>
                     </fieldset>
                     <span><a href="#">Forgot your password?</a></span>

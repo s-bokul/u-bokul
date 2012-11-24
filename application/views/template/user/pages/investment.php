@@ -3,9 +3,12 @@
     $(document).ready(function() {
         $("#invest").validate({
             rules: {
+                pin:{ required:true },
                 investment_amount: {required:true, number: true, min: 20}
             },
             errorPlacement: function(error, element) {
+                if(element.attr("name") == "pin")
+                    error.insertAfter("#pin_error");
                 if(element.attr("name") == "investment_amount")
                     error.insertAfter("#amount_error");
             }
@@ -34,6 +37,13 @@
     <?php echo validation_errors('<div class="error">', '</div>'); ?>
     <?php echo form_open(site_url('/userpanel/investment-save'),array('name'=>'invest','id'=>'invest'));?>
     <table class="purchase defaulttable">
+        <tr>
+            <td>Pin<span class="req">*</span></td>
+            <td class="leftalign">
+                <input type="password" name="pin" id="pin" value="">
+                <br /><span id="pin_error"></span>
+            </td>
+        </tr>
         <tr>
             <td class="leftalign">Amount</td>
             <td>

@@ -191,6 +191,7 @@ class User_model extends CI_Model{
         $conditional_array = array(
             'email' => $data['email'],
             'passwd' => md5($data['passwd1']),
+            'pin' => $data['pin'],
             'is_active' => 1
         );
         $query = $this->db->get_where('user_informations', $conditional_array);
@@ -270,8 +271,13 @@ class User_model extends CI_Model{
 
         $result = $this->db->simple_query("UPDATE `user_informations` SET `balance` = balance-".$params['withdraw_amount']." WHERE `user_informations`.`user_id` = ".$params['user_id'].";");
 
+
+        $account_no_data = explode(':', $params['withdraw_mathod']);
+        $params['withdraw_mathod'] = $account_no_data[0];
+        $params['account_no'] = $account_no_data[1];
         $params['paid_status'] = 0;
         $params['create_date'] = date('Y-m-d');
+
         $this->db->set($params);
         if($this->db->insert('withdraw_accounts'))
         {

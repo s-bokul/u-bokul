@@ -696,17 +696,17 @@ ul.settingpage{
 }
 
 .usersettingtable input[type=text]{
-	width:250px;
+	/*width:250px;*/
 	height:22px;
 	font-size:14px;
-	background-color:#FFFEDB;
+	/*background-color:#FFFEDB;*/
 }
 
 .usersettingtable input[type=password]{
-    width:250px;
+    /*width:250px;*/
     height:22px;
     font-size:14px;
-    background-color:#FFFEDB;
+    /*background-color:#FFFEDB;*/
 }
 
 .usersettingtable input[type=text]:focus{

@@ -285,30 +285,64 @@ class Userpanel extends User_Controller {
         $user_id = $user_info['user_id'];
         $data_investment = $this->input->post();
         $data_investment['user_id'] = $user_id;
-        if($this->user_model->investment_save($data_investment))
+        $data['user_info'] = $this->user_model->getUserInfo($user_id);
+        if($this->user_model->check_pin($data_investment['pin'], $user_id))
         {
-            $msg = array(
-                'status' => true,
-                'class' => 'alert alert-success',
-                'msg' => 'Successfully Invested.'
-            );
+            unset($data_investment['pin']);
+            if($data['user_info']['balance'] >= $data_investment['investment_amount'])
+            {
+                if($this->user_model->investment_save($data_investment))
+                {
+                    $msg = array(
+                        'status' => true,
+                        'class' => 'alert alert-success',
+                        'msg' => 'Successfully Invested.'
+                    );
 
-            $data = json_encode($msg);
+                    $data = json_encode($msg);
 
-            $this->session->set_flashdata('msg', $data);
+                    $this->session->set_flashdata('msg', $data);
+                }
+                else
+                {
+                    $msg = array(
+                        'status' => false,
+                        'class' => 'alert alert-error',
+                        'msg' => 'Failed please try again.'
+                    );
+
+                    $data = json_encode($msg);
+
+                    $this->session->set_flashdata('msg', $data);
+                }
+            }
+            else
+            {
+                $msg = array(
+                    'status' => false,
+                    'class' => 'alert alert-error',
+                    'msg' => 'Request Failed. Not have enough credit.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+
         }
         else
         {
             $msg = array(
                 'status' => false,
                 'class' => 'alert alert-error',
-                'msg' => 'Failed please try again.'
+                'msg' => 'Wrong Pin Code.'
             );
 
             $data = json_encode($msg);
 
             $this->session->set_flashdata('msg', $data);
         }
+
 
         redirect('/userpanel/new-investment');
     }
@@ -507,11 +541,9 @@ class Userpanel extends User_Controller {
         //$data = null;
         $error = null;
         $title = 'Withdraw';
-        $data = $this->session->userdata('user_info');
-        /*echo '<pre>';
-        print_r($data);
-        echo '</pre>';*/
-        //$this->template->write_view('header', 'template/user/header',array('data'=>$data));
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $data['user_info'] = $this->user_model->getUserInfo($user_id);
         $this->template->write_view('content','template/user/pages/withdraw',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
     }

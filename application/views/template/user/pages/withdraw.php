@@ -7,7 +7,7 @@
             rules: {
                 pin:{ required:true },
                 withdraw_amount: {required:true, number: true, min: 20},
-                account_no: { required:true }
+                withdraw_mathod: { required:true }
             }
         });
 
@@ -52,16 +52,26 @@
     <tr>
         <td>Method<span class="req">*</span></td>
         <td class="leftalign">
-            Liberty Reserve
-            <input type="radio" name="withdraw_mathod" id="withdraw_mathod" value="Liberty" checked="checked">
+            <select name="withdraw_mathod" id="withdraw_mathod">
+                <?php
+                    if(!empty($data['user_info']['liberty_account']))
+                        echo '<option value="Liberty:'.$data['user_info']['liberty_account'].'">Liberty Reserve->'.$data['user_info']['liberty_account'].'</option>';
+                    if(!empty($data['user_info']['liberty_account']))
+                        echo '<option value="Payza:'.$data['user_info']['payza_account'].'">Payza->'.$data['user_info']['payza_account'].'</option>';
+                    if(empty($data['user_info']['liberty_account']) && empty($data['user_info']['liberty_account']))
+                        echo '<option value="">Please add account no first</option>';
+                ?>
+            </select>
+            <!--Liberty Reserve
+            <input type="radio" name="withdraw_mathod" id="withdraw_mathod" value="Liberty" checked="checked">-->
         </td>
     </tr>
-    <tr>
+    <!--<tr>
         <td>Liberty Account No<span class="req">*</span></td>
         <td class="leftalign">
-            <input type="text" name="account_no" id="account_no">
+            <input type="text" name="account_no" id="account_no" readonly="readonly">
         </td>
-    </tr>
+    </tr>-->
     <tr>
         <td></td>
         <td class="leftalign">
