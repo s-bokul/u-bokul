@@ -94,7 +94,7 @@ class User_model extends CI_Model{
         $this->email->subject('Activation Link Form UFREDIS');
         $this->email->message("Hello ".$params['lname']."
         <br />Your Pin Code : ".$params['pin']."
-        <br />Please click the link bellow to activate your account. <a href='http://ufredis.local.com/register/activate/".$params['activating_code']."'>http://ufredis.local.com/register/activate/".$params['activating_code']."</a>
+        <br />Please click the link bellow to activate your account. <a href='http://ufredis.com/register/activate/".$params['activating_code']."'>http://ufredis.com/register/activate/".$params['activating_code']."</a>
         <br />Thanks<br />Ufredis Team.");
 
         $this->email->send();
