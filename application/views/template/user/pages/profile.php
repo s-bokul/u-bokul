@@ -172,14 +172,14 @@
                             <input type="text" id="city" name="city" value="<?php echo $data['user_info']['city']; ?>">
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td class="text-info">
                             Country
                         </td>
                         <td>
-                            <input type="text" id="country" name="country" value="<?php echo $data['user_info']['country']; ?>">
+                            <input type="text" id="country" name="country" value="<?php /*echo $data['user_info']['country']; */?>">
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td colspan="2">
                             <button type="submit" class="btn btn-primary">Save</button>

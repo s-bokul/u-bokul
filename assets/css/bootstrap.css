@@ -6003,3 +6003,6 @@ button.close {
     overflow: visible !important;
   }
 }
+logout:hover{
+    color: #0081c2;
+}

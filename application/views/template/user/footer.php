@@ -8,5 +8,5 @@
     vertical-align: middle;
     color: #fff;
     ">
-    ufredis.com
+    © 2012 ufredis.com
 </div>
