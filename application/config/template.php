@@ -56,7 +56,7 @@ $template['active_template'] = 'default';
 |--------------------------------------------------------------------------
 */
 
-$template['default']['template'] = 'template/main';
+$template['default']['template'] = 'new_template/main';
 $template['default']['regions'] = array(
     'head',
     'header',
