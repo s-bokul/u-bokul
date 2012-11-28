@@ -8,8 +8,8 @@ class My_Controller extends CI_Controller {
     }
 	
 	public function set_temlates(){
-		$this->template->write_view('header', 'template/header',array());
-		$this->template->write_view('footer', 'template/footer',array());
+		$this->template->write_view('header', 'new_template/header',array());
+		$this->template->write_view('footer', 'new_template/footer',array());
 	}
 }
 
