@@ -17,7 +17,7 @@ class Register extends My_Controller {
         $data['country_list'] = $this->user_model->getCountryList();
         $error = null;
         $title = 'Register';
-        $this->template->write_view('content','pages/register',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->write_view('content','pages/new-register',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
         //$this->output->enable_profiler(TRUE);
     }
@@ -41,7 +41,7 @@ class Register extends My_Controller {
                 $data = null;
                 $error = null;
                 $title = 'Register';
-                $this->template->write_view('content','pages/register',array('data'=>$data,'error'=>$error,'title'=>$title));
+                $this->template->write_view('content','pages/new-register',array('data'=>$data,'error'=>$error,'title'=>$title));
                 $this->template->render();
             }
             else

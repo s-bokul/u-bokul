@@ -20,7 +20,7 @@
 
             <div class="nav-collapse" style="float:right;">
                 <ul class="nav right-nav">
-                    <li><a href="#" class="register-slider">Signup</a></li>
+                    <li><a href="/register" class="register-slider">Signup</a></li>
                     <li><a class="login-slider" href="#">Login</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
