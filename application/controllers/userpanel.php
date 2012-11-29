@@ -51,8 +51,16 @@ class Userpanel extends User_Controller {
                 $this->payment();
                 break;
 
+            case 'payment-payza':
+                $this->payment_payza();
+                break;
+
             case 'status':
                 $this->status();
+                break;
+
+            case 'status-payza':
+                $this->status_payza();
                 break;
 
             case 'investment-save':
@@ -402,7 +410,15 @@ class Userpanel extends User_Controller {
             redirect('/userpanel/purchase');
         }
 
-        redirect('/userpanel/payment');
+        if($data_parchase['payment_method'] == 'Liberty')
+        {
+            redirect('/userpanel/payment');
+        }
+        else
+        {
+            redirect('/userpanel/payment-payza');
+        }
+
 
     }
 
@@ -419,8 +435,23 @@ class Userpanel extends User_Controller {
         $this->template->render();
     }
 
+    public function payment_payza()
+    {
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $error = null;
+        $title = 'Payment';
+        $data['data_parchase'] = $this->session->userdata('data_parchase');
+        //print_r($data['data_parchase']);
+        //die();
+        $this->template->write_view('content','template/user/pages/payment-payza',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
+
     public function status()
     {
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
         $insert_id = $this->uri->segment(3);
         $amount = $this->uri->segment(4);
         $status = $this->uri->segment(5);
@@ -458,6 +489,64 @@ class Userpanel extends User_Controller {
                $this->session->set_flashdata('msg', $data);
                redirect('/userpanel/purchase');
            }
+        }
+        else
+        {
+            $this->user_model->update_payment_status($insert_id, 1, $amount, $user_id);
+            $msg = array(
+                'status' => false,
+                'class' => 'alert alert-error',
+                'msg' => 'Request Failed.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+            redirect('/userpanel/purchase');
+        }
+    }
+
+    public function status_payza()
+    {
+        $user_info = $this->session->userdata('user_info');
+        $user_id = $user_info['user_id'];
+        $insert_id = $this->uri->segment(3);
+        $amount = $this->uri->segment(4);
+        $status = $this->uri->segment(5);
+        if($status == md5('fail'))
+        {
+            $this->user_model->update_payment_status($insert_id, 1, $amount, $user_id);
+            $msg = array(
+                'status' => false,
+                'class' => 'alert alert-error',
+                'msg' => 'Request Failed.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+            redirect('/userpanel/purchase');
+        }
+        else if($status == md5('success'))
+        {
+            if($amount == $_GET['lr_amnt'])
+            {
+                $user_info = $this->session->userdata('user_info');
+                $user_id = $user_info['user_id'];
+                $this->load->model('user_model');
+                $this->user_model->update_payment_status($insert_id, 1, $amount, $user_id);
+
+                $msg = array(
+                    'status' => true,
+                    'class' => 'alert alert-success',
+                    'msg' => 'Successfully Received your balance.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+                redirect('/userpanel/purchase');
+            }
         }
         else
         {

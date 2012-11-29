@@ -46,8 +46,12 @@
         <tr>
             <td class="leftalign">Payment Method</td>
             <td>
-                Liberty Reserve
-                <input type="radio" name="payment_method" id="payment_method" value="Liberty" checked="checked">
+                <select id="payment_method" name="payment_method">
+                    <option value="Liberty">Liberty Reserve</option>
+                    <option value="Payza">Payza</option>
+                </select>
+                <!--Liberty Reserve
+                <input type="radio" name="payment_method" id="payment_method" value="Liberty" checked="checked">-->
 
             </td>
         </tr>
